@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { NavLink } from "react-router";
 import Logo from '@/assets/img/logo.svg'
 import { storeContext } from "@/providers/store/context";
-const Navbar = () => {
+const Navbar = ({ isAuth }) => {
     const [navbarOpen, setNavbarOpen] = useState(false);
     const { currentUser } = useContext(storeContext);
     return (
@@ -10,11 +10,16 @@ const Navbar = () => {
             <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                 <div className="w-full lg:  w-[20%] relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
                     <div className="flex items-center flex-col mr-4">
-                        <img
-                            alt="..."
-                            src={Logo}
-                            className="w-10"
-                        />
+                        <NavLink
+
+                            to="/"
+                        >
+                            <img
+                                alt="..."
+                                src={Logo}
+                                className="w-10"
+                            />
+                        </NavLink >
                         <NavLink
                             className=" text-sm font-bold leading-relaxed inline-block  py-2 whitespace-nowrap uppercase border-0 outline-none"
                             to="/"
@@ -41,36 +46,39 @@ const Navbar = () => {
                     ) : (
                         <ul className="hidden md:flex  justify-between flex-row w-full list-none mr-auto">
 
+                            {
+                                !isAuth ?
+                                    <div className="flex w-[50%] pl-4">
+                                        <li className="flex items-center">
+                                            <a
+                                                className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                                                href="#services"
+                                            >
+                                                Services
+                                            </a >
+                                        </li>
+                                        <li className="flex items-center">
+                                            <a
+                                                className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                                                href="#aboutus"
+                                            >
+                                                About Us
+                                            </a >
+                                        </li>
+                                    </div> : ''
+                            }
 
-                            <div className="flex w-[50%] pl-4">
-                                <li className="flex items-center">
-                                    <a
-                                        className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                                        href="#services"
-                                    >
-                                        Services
-                                    </a >
-                                </li>
-                                <li className="flex items-center">
-                                    <a
-                                        className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                                        href="#aboutus"
-                                    >
-                                        About Us
-                                    </a >
-                                </li>
-                            </div>
                             {
                                 !currentUser ?
                                     <div className="flex w-[50%] justify-end pr-4">
-                                        <li className="flex items-center">
+                                        {!isAuth ? <li className="flex items-center">
                                             <NavLink
                                                 className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                                                 to="auth/login"
                                             >
                                                 Login
                                             </NavLink >
-                                        </li>
+                                        </li> : ''}
                                         {/* <li className="flex items-center">
                                             <NavLink to="auth/register">
                                                 <button
@@ -83,13 +91,13 @@ const Navbar = () => {
                                         </li> */}
                                     </div>
                                     : <li className="flex items-center">
-                                    <NavLink
-                                        className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                                        to="dashboard"
-                                    >
-                                        Dashboard
-                                    </NavLink >
-                                </li>
+                                        <NavLink
+                                            className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                                            to="dashboard"
+                                        >
+                                            Dashboard
+                                        </NavLink >
+                                    </li>
                             }
 
 
@@ -141,14 +149,14 @@ const Navbar = () => {
                                                 Register
                                             </li>
                                         </NavLink > */}
-                                    </> :  <NavLink
-                                            className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
-                                            to="dashboard"
-                                        >
-                                            <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
-                                                Dashboard
-                                            </li>
-                                        </NavLink >}
+                                    </> : <NavLink
+                                        className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
+                                        to="dashboard"
+                                    >
+                                        <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
+                                            Dashboard
+                                        </li>
+                                    </NavLink >}
                                 </div>
                             </>
 
