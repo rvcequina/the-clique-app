@@ -71,7 +71,7 @@ const Navbar = () => {
                                                 Login
                                             </NavLink >
                                         </li>
-                                        <li className="flex items-center">
+                                        {/* <li className="flex items-center">
                                             <NavLink to="auth/register">
                                                 <button
                                                     className="bg-white text-blueGray-700 active:bg-blueGray-50 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
@@ -80,7 +80,7 @@ const Navbar = () => {
                                                     <i className="fas fa-user-plus"></i> Register
                                                 </button>
                                             </NavLink >
-                                        </li>
+                                        </li> */}
                                     </div>
                                     : <li className="flex items-center">
                                     <NavLink
@@ -133,14 +133,14 @@ const Navbar = () => {
                                                 Login
                                             </li>
                                         </NavLink >
-                                        <NavLink
+                                        {/* <NavLink
                                             className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
                                             to="auth/register"
                                         >
                                             <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
                                                 Register
                                             </li>
-                                        </NavLink >
+                                        </NavLink > */}
                                     </> :  <NavLink
                                             className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
                                             to="dashboard"
