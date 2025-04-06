@@ -44,20 +44,20 @@ const Navbar = () => {
 
                             <div className="flex w-[50%] pl-4">
                                 <li className="flex items-center">
-                                    <NavLink
+                                    <a
                                         className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                                        to="/"
+                                        href="#services"
                                     >
                                         Services
-                                    </NavLink >
+                                    </a >
                                 </li>
                                 <li className="flex items-center">
-                                    <NavLink
+                                    <a
                                         className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                                        to="/"
+                                        href="#aboutus"
                                     >
                                         About Us
-                                    </NavLink >
+                                    </a >
                                 </li>
                             </div>
                             {
