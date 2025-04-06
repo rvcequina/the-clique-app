@@ -38,7 +38,7 @@ const Login = () => {
         <>
             <div className="bg-slate-800 pt-[6rem] pb-[4rem]  min-h-[100vh] flex justify-center items-center">
 
-                <div className="px-4 sm:w-[15rem] lg:w-[30rem]">
+                <div className="px-4 w-[20rem] lg:w-[30rem]">
                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
 
                         <div className="flex-auto px-4 lg:px-10 py-10 ">

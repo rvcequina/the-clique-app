@@ -47,8 +47,9 @@ const Navbar = ({ isAuth }) => {
                         <ul className="hidden md:flex  justify-between flex-row w-full list-none mr-auto">
 
                             {
-                                !isAuth ?
-                                    <div className="flex w-[50%] pl-4">
+
+                                <div className="flex w-[50%] pl-4">
+                                    {!isAuth ? <>
                                         <li className="flex items-center">
                                             <a
                                                 className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
@@ -65,20 +66,30 @@ const Navbar = ({ isAuth }) => {
                                                 About Us
                                             </a >
                                         </li>
-                                    </div> : ''
+                                    </> : ''}
+                                </div>
                             }
 
                             {
                                 !currentUser ?
                                     <div className="flex w-[50%] justify-end pr-4">
-                                        {!isAuth ? <li className="flex items-center">
-                                            <NavLink
-                                                className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                                                to="auth/login"
-                                            >
-                                                Login
-                                            </NavLink >
-                                        </li> : ''}
+                                        {!isAuth ?
+                                            <li className="flex items-center">
+                                                <NavLink
+                                                    className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                                                    to="auth/login"
+                                                    end
+                                                >
+                                                    Login
+                                                </NavLink >
+                                            </li> : <li className="flex items-center">
+                                                <NavLink
+                                                    className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                                                    to="/"
+                                                >
+                                                    Go Back
+                                                </NavLink >
+                                            </li>}
                                         {/* <li className="flex items-center">
                                             <NavLink to="auth/register">
                                                 <button
@@ -114,33 +125,49 @@ const Navbar = ({ isAuth }) => {
                             <>
                                 <div className="flex flex-col items-center lg:ml-auto w-[12rem]   bg-white shadow-md rounded">
 
-                                    <NavLink
-                                        className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
-                                        to="/"
-                                    >
-                                        <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
-                                            Services
-                                        </li>
-                                    </NavLink >
+                                    {
+                                        !isAuth ?
+                                            <>
+                                                <a
+                                                    className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
+                                                    href="#services"
+                                                >
+                                                    <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
+                                                        Services
+                                                    </li>
+                                                </a >
 
-                                    <NavLink
-                                        className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
-                                        to="/"
-                                    >
-                                        <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
-                                            About Us
-                                        </li>
-                                    </NavLink >
+                                                <a
+                                                    className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
+                                                    href="#aboutus"
+                                                >
+                                                    <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
+                                                        About Us
+                                                    </li>
+                                                </a >
+                                            </>
+                                            :''
+                                    }
                                     {!currentUser ? <>
                                         <hr />
-                                        <NavLink
-                                            className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
-                                            to="auth/login"
-                                        >
-                                            <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
-                                                Login
-                                            </li>
-                                        </NavLink >
+                                        {!isAuth ?
+                                            <NavLink
+                                                className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
+                                                to="auth/login"
+                                            >
+                                                <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
+                                                    Login
+                                                </li>
+                                            </NavLink >
+                                            :
+                                            <NavLink
+                                                className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
+                                                to="/"
+                                            >
+                                                <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
+                                                    Go back
+                                                </li>
+                                            </NavLink >}
                                         {/* <NavLink
                                             className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
                                             to="auth/register"
