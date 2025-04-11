@@ -1,42 +1,46 @@
 import { NavLink, useNavigate } from "react-router";
-import React, { useContext } from "react";
+import React, { useContext} from "react";
 
 import { storeContext } from "@/providers/store/context";
-
+import Notification from "@/components/Alerts/Notification";
 
 const Login = () => {
-    const { store, setCurrentUser } = useContext(storeContext);
+    const { store, setCurrentUser,handleNotif,showNotif } = useContext(storeContext);
+    
+
+
+   
     let navigate = useNavigate();
 
 
     const handleSubmit = (formData) => {
-        const { nurseLogin, nurses } = store
-
+        const { users, nurses } = store
+        handleNotif(!showNotif)
         const username = formData.get("username");
         const password = formData.get("password");
 
-        const checkUser = nurseLogin.some(item => item.username == username)
+        const checkUser = users.some(item => item.username == username)
 
         if (!checkUser) {
             return
         }
 
-        const checkPass = nurseLogin.some(item => item.password == password)
+        const checkPass = users.some(item => item.password == password)
         if (!checkPass) {
             return
         }
 
-        const user = nurses.find(item => item.nurseId == nurseLogin.find(item => item.username == username).nurseId)
+        const user = nurses.find(item => item.nurseId == users.find(item => item.username == username).nurseId)
 
         setCurrentUser(user)
 
-        navigate("/dashboard");
+        // navigate("/dashboard");
 
     }
 
     return (
         <>
-            <div className="bg-slate-800 pt-[6rem] pb-[4rem]  min-h-[100vh] flex justify-center items-center">
+            <div className="bg-slate-800 pt-[6rem] pb-[4rem] relative  min-h-[100vh] flex justify-center items-center">
 
                 <div className="px-4 w-[20rem] lg:w-[30rem]">
                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
@@ -112,13 +116,13 @@ const Login = () => {
                             </a>
                         </div>
                         <div className="w-1/2 text-right">
-                            <NavLink to="auth/register" className="text-blueGray-200">
+                            <NavLink to="/auth/register" replace className="text-blueGray-200">
                                 <small>Create new account</small>
                             </NavLink>
                         </div>
                     </div>
                 </div>
-
+                <Notification />
             </div>
         </>
     )

@@ -77,7 +77,6 @@ export const STORE_CONTEXT = {
       lastName: "Taylor",
       contactNumber: "5555555555",
       assignedStationId: 1,
-      assignedDoctorId: 1,
       createdAt: "2025-03-01",
       updatedAt: "2025-03-28",
     },
@@ -87,7 +86,6 @@ export const STORE_CONTEXT = {
       lastName: "Brown",
       contactNumber: "5554444444",
       assignedStationId: 2,
-      assignedDoctorId: 2,
       createdAt: "2025-03-02",
       updatedAt: "2025-03-29",
     },
@@ -189,10 +187,11 @@ export const STORE_CONTEXT = {
     },
     // Add more lab results here...
   ],
-  patientLogin: [
+  users:[
     {
       loginId: 1,
       patientId: 1,
+      userType:2,
       username: "john_doe",
       password: "secure123",
       lastLogin: "2025-03-27"
@@ -200,29 +199,62 @@ export const STORE_CONTEXT = {
     {
       loginId: 2,
       patientId: 2,
+      userType:2,
       username: "jane_smith",
       password: "secure456",
       lastLogin: "2025-03-28"
     },
-    // Add more patient login records here...
-  ],
-  nurseLogin: [
     {
-      loginId: 1,
+      loginId: 3,
       nurseId: 1,
+      userType:1,
       username: "swift_taylor",
       password: "nurse123",
       lastLogin: "2025-03-27"
     },
     {
-      loginId: 2,
+      loginId: 4,
       nurseId: 2,
+      userType:1,
       username: "michael_brown",
       password: "nurse456",
       lastLogin: "2025-03-28"
     },
-    // Add more nurse login records here...
   ],
+  // patientLogin: [
+  //   {
+  //     loginId: 1,
+  //     patientId: 1,
+  //     username: "john_doe",
+  //     password: "secure123",
+  //     lastLogin: "2025-03-27"
+  //   },
+  //   {
+  //     loginId: 2,
+  //     patientId: 2,
+  //     username: "jane_smith",
+  //     password: "secure456",
+  //     lastLogin: "2025-03-28"
+  //   },
+  //   // Add more patient login records here...
+  // ],
+  // nurseLogin: [
+  //   {
+  //     loginId: 1,
+  //     nurseId: 1,
+  //     username: "swift_taylor",
+  //     password: "nurse123",
+  //     lastLogin: "2025-03-27"
+  //   },
+  //   {
+  //     loginId: 2,
+  //     nurseId: 2,
+  //     username: "michael_brown",
+  //     password: "nurse456",
+  //     lastLogin: "2025-03-28"
+  //   },
+  //   // Add more nurse login records here...
+  // ],
 };
 
 export const storeContext = createContext(STORE_CONTEXT);
