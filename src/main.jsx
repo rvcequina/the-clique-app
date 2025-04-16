@@ -8,14 +8,17 @@ import '@/css/styles.css'
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import StoreProvider from '@/providers/store/index';
+import NotificationProvider from './providers/notification';
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <StoreProvider>
-      <RouterProvider router={router} >
-        <App />
-      </RouterProvider>
+      <NotificationProvider>
+        <RouterProvider router={router} >
+          <App />
+        </RouterProvider>
+      </NotificationProvider>
     </StoreProvider>
   </StrictMode>,
 )

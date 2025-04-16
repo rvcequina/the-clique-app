@@ -1,40 +1,57 @@
 import { NavLink, useNavigate } from "react-router";
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 
+import { notifyContext } from "@/providers/notification/context";
 import { storeContext } from "@/providers/store/context";
-import Notification from "@/components/Alerts/Notification";
 
 const Login = () => {
-    const { store, setCurrentUser,handleNotif,showNotif } = useContext(storeContext);
-    
+    const { notify, handleNotify } = useContext(notifyContext);
+    const { store, setCurrentUser } = useContext(storeContext);
 
 
-   
+
     let navigate = useNavigate();
 
 
     const handleSubmit = (formData) => {
         const { users, nurses } = store
-        handleNotif(!showNotif)
+
+
         const username = formData.get("username");
         const password = formData.get("password");
+
+
 
         const checkUser = users.some(item => item.username == username)
 
         if (!checkUser) {
+            handleNotify({
+                title: 'Warning',
+                messages: 'Sign in problem occured',
+                status: 'warn',
+            })
             return
         }
-
+        //refactor check found user credential rather than iteration
         const checkPass = users.some(item => item.password == password)
         if (!checkPass) {
+            handleNotify({
+                title:'Warning',
+                messages: 'Sign in problem occured',
+                status: 'warn',
+            })
             return
         }
 
         const user = nurses.find(item => item.nurseId == users.find(item => item.username == username).nurseId)
 
         setCurrentUser(user)
-
-        // navigate("/dashboard");
+        handleNotify({
+            title:'Welcome',
+            messages: `${user.firstName}`,
+            status: 'success',
+        })
+        navigate("/dashboard");
 
     }
 
@@ -107,13 +124,12 @@ const Login = () => {
                     {/* <hr className="mt-6 border-b-1 border-blueGray-300" /> */}
                     <div className="flex flex-wrap mt-6 relative">
                         <div className="w-1/2">
-                            <a
-                                href="#pablo"
-                                onClick={(e) => e.preventDefault()}
+                            <div
+
                                 className="text-blueGray-200"
                             >
-                                <small>Forgot password?</small>
-                            </a>
+                                <small>Don't have an account?</small>
+                            </div>
                         </div>
                         <div className="w-1/2 text-right">
                             <NavLink to="/auth/register" replace className="text-blueGray-200">
@@ -122,7 +138,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-                <Notification />
+
             </div>
         </>
     )

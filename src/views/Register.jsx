@@ -1,34 +1,61 @@
 import { NavLink, useNavigate } from "react-router";
 import React, { useContext } from "react";
-
+import { notifyContext } from "@/providers/notification/context";
 import { storeContext } from "@/providers/store/context";
 import asset2 from '@/assets/img/team-2-800x800.jpg'
 import CardsProfile from "@/components/Cards/CardsProfile";
 
 const Register = () => {
     const { store } = useContext(storeContext);
-
+    const { handleNotify } = useContext(notifyContext);
     let navigate = useNavigate();
 
-    const handleSubmit = (formData) => {
+    const handleSubmit = async (formData) => {
+        const { nurses, users } = store
+
+        const firstname = formData.get("firstname");
+        const lastname = formData.get("lastname");
+        const password = formData.get("password").trim();
+        const confirmpassword = formData.get("confirmpassword").trim();
+        const contactnumber = formData.get("contactnumber");
+
+        const checkPass = users.some(item => item.password == password)
+        if (checkPass) {
+            handleNotify({
+                title: 'Warning',
+                messages: 'User Already exists',
+                status: 'warn',
+            })
+            return
+        }
+        console.log(password, confirmpassword)
+        if (password !== confirmpassword) {
+            handleNotify({
+                title: 'Warning',
+                messages: 'Password mismatch',
+                status: 'warn',
+            })
+            return
+        }
+
         const now = new Date();
         const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-        console.log(formattedDate);
-        const { nurses,users } = store
-        const loginDetails ={
-            loginId: nurses.length+1,
-            nurseId: nurses.length+1,
-            userType:1,
-            username: 'test',
-            password: '123',
+
+
+        const loginDetails = {
+            loginId: users.length + 1,
+            nurseId: nurses.length + 1,
+            userType: 1,
+            username: `${lastname.toLowerCase()}_${firstname.split(' ')[0].toLowerCase()}`,
+            password: password,
             lastLogin: `${formattedDate}`
         }
 
         const nurseDetails = {
-            nurseId: nurses.length+1,
-            firstName: '',
-            lastName: '',
-            contactNumber: '',
+            nurseId: nurses.length + 1,
+            firstName: firstname,
+            lastName: lastname,
+            contactNumber: contactnumber,
             assignedStationId: 1,
             createdAt: `${formattedDate}`,
             updatedAt: ``
@@ -57,15 +84,47 @@ const Register = () => {
                                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                         htmlFor="grid-password"
                                     >
-                                        username
+                                        First name
                                     </label>
                                     <input
                                         type="text"
-                                        name="username"
+                                        name="firstname"
                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        placeholder="Email"
+                                        placeholder="John"
+                                        required
                                     />
                                 </div>
+                                <div className="relative w-full mb-3">
+                                    <label
+                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password"
+                                    >
+                                        Last name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="lastname"
+                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        placeholder="Smith"
+                                        required
+                                    />
+                                </div>
+                                <div className="relative w-full mb-3">
+                                    <label
+                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password"
+                                    >
+                                        Contact Number
+                                    </label>
+                                    <input
+                                        type="tel"
+                                        name="contactnumber"
+                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        placeholder="09123456789"
+                                        pattern="[0-9]{4}[0-9]{7}"
+                                    />
+                                </div>
+
 
                                 <div className="relative w-full mb-3">
                                     <label
@@ -79,20 +138,27 @@ const Register = () => {
                                         name="password"
                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         placeholder="Password"
+                                        required
                                     />
                                 </div>
-                                <div>
-                                    <label className="inline-flex items-center cursor-pointer">
-                                        <input
-                                            id="customCheckLogin"
-                                            type="checkbox"
-                                            className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                                        />
-                                        <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                                            Remember me
-                                        </span>
+
+                                <div className="relative w-full mb-3">
+                                    <label
+                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password"
+                                    >
+                                        Confirm Password
                                     </label>
+                                    <input
+                                        type="password"
+                                        name="confirmpassword"
+                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        placeholder="Password"
+                                        required
+                                    />
                                 </div>
+
+
 
                                 <div className="text-center mt-6">
                                     <button
@@ -100,7 +166,7 @@ const Register = () => {
                                         className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                                         type="submit"
                                     >
-                                        Sign In
+                                        Register
                                     </button>
                                 </div>
                             </form>
@@ -109,17 +175,16 @@ const Register = () => {
                     {/* <hr className="mt-6 border-b-1 border-blueGray-300" /> */}
                     <div className="flex flex-wrap mt-6 relative">
                         <div className="w-1/2">
-                            <a
-                                href="#pablo"
-                                onClick={(e) => e.preventDefault()}
+                            <div
+
                                 className="text-blueGray-200"
                             >
-                                <small>Forgot password?</small>
-                            </a>
+                                <small>Already have an account?</small>
+                            </div>
                         </div>
                         <div className="w-1/2 text-right">
-                            <NavLink to="/auth/register" replace className="text-blueGray-200">
-                                <small>Create new account</small>
+                            <NavLink to="/auth/login" replace className="text-blueGray-200">
+                                <small>Login</small>
                             </NavLink>
                         </div>
                     </div>
