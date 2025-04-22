@@ -1,42 +1,56 @@
 import { NavLink, useNavigate } from "react-router";
 import React, { useContext } from "react";
 
+import { notifyContext } from "@/providers/notification/context";
 import { storeContext } from "@/providers/store/context";
 
-
 const Login = () => {
-    const { store, setCurrentUser } = useContext(storeContext);
+    const { handleNotify } = useContext(notifyContext);
+    const { store, setCurrentUser, getNurseById, getPatientById } = useContext(storeContext);
+
+
     let navigate = useNavigate();
 
-
-    const handleSubmit = (formData) => {
-        const { nurseLogin, nurses } = store
+    const handleSubmit = async (formData) => {
+        const { users } = store
 
         const username = formData.get("username");
         const password = formData.get("password");
 
-        const checkUser = nurseLogin.some(item => item.username == username)
+        const checkUser = users.some(item => item.username == username)
 
         if (!checkUser) {
+            handleNotify({
+                title: 'Warning',
+                messages: 'Sign in problem occured',
+                status: 'warn',
+            })
             return
         }
 
-        const checkPass = nurseLogin.some(item => item.password == password)
-        if (!checkPass) {
+        const userData = users.find(item => item.username == username)
+        if (userData.password != password) {
+            handleNotify({
+                title: 'Warning',
+                messages: 'Sign in problem occured',
+                status: 'warn',
+            })
             return
         }
-
-        const user = nurses.find(item => item.nurseId == nurseLogin.find(item => item.username == username).nurseId)
-
-        setCurrentUser(user)
-
+        let userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId)
+        setCurrentUser(userDetails)
+        handleNotify({
+            title: 'Welcome',
+            messages: `${userDetails.firstName} ${userDetails.lastName}`,
+            status: 'success',
+        })
         navigate("/dashboard");
 
     }
 
     return (
         <>
-            <div className="bg-slate-800 pt-[6rem] pb-[4rem]  min-h-[100vh] flex justify-center items-center">
+            <div className="bg-slate-800 pt-[6rem] pb-[4rem] relative  min-h-[100vh] flex justify-center items-center">
 
                 <div className="px-4 w-[20rem] lg:w-[30rem]">
                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
@@ -103,16 +117,15 @@ const Login = () => {
                     {/* <hr className="mt-6 border-b-1 border-blueGray-300" /> */}
                     <div className="flex flex-wrap mt-6 relative">
                         <div className="w-1/2">
-                            <a
-                                href="#pablo"
-                                onClick={(e) => e.preventDefault()}
+                            <div
+
                                 className="text-blueGray-200"
                             >
-                                <small>Forgot password?</small>
-                            </a>
+                                <small>Don't have an account?</small>
+                            </div>
                         </div>
                         <div className="w-1/2 text-right">
-                            <NavLink to="auth/register" className="text-blueGray-200">
+                            <NavLink to="/auth/register" replace className="text-blueGray-200">
                                 <small>Create new account</small>
                             </NavLink>
                         </div>

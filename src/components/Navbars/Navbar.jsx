@@ -78,7 +78,7 @@ const Navbar = ({ isAuth }) => {
                                                 <NavLink
                                                     className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                                                     to="auth/login"
-                                                    end
+                                                    replace
                                                 >
                                                     Login
                                                 </NavLink >
@@ -154,6 +154,7 @@ const Navbar = ({ isAuth }) => {
                                             <NavLink
                                                 className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
                                                 to="auth/login"
+                                                replace
                                             >
                                                 <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
                                                     Login

@@ -1,0 +1,11 @@
+.notif{
+    transform: translateX(100dvw);
+    opacity: 0;
+    transition:transform 1s ease-in-out,opacity 0.5s ease-in-out;
+    
+}
+
+.slide-in{
+    opacity: 1;
+    transform: translateX(0dvw);
+}

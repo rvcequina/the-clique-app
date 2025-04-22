@@ -13,10 +13,11 @@ const Unauth = () => {
         }
     }, [location])
     return (
-        <div className="white-space">
+        <div className="white-space relative">
             <Navbar transparent isAuth={isAuth} />
             <Outlet />
             <Footer />
+           
         </div>
     )
 }
