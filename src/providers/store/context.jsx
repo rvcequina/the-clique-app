@@ -39,7 +39,6 @@ export const STORE_CONTEXT = {
       fullName: "Dr. Emily Watson",
       specialty: "Cardiology",
       contactNumber: "9876543210",
-      assignedStationId: 1,
       createdAt: "2025-03-01",
       updatedAt: "2025-03-28",
     },
@@ -48,7 +47,6 @@ export const STORE_CONTEXT = {
       fullName: "Dr. David Evans",
       specialty: "Neurology",
       contactNumber: "8765432109",
-      assignedStationId: 2,
       createdAt: "2025-03-02",
       updatedAt: "2025-03-29",
     },
@@ -98,20 +96,19 @@ export const STORE_CONTEXT = {
     {
       historyId: 1,
       patientId: 1,
-      symptoms: "Fever, Cough",
-      diagnosis: "Flu",
-      treatment: "Rest and fluids",
+      medicationId: "1391",
+      symptomsId: "4567",
       visitedDate: "2025-03-15",
       doctorId: 1,
       createdAt: "2025-03-15",
       updatedAt: "2025-03-15",
+
     },
     {
       historyId: 2,
-      patientId: 2,
-      symptoms: "Headache",
-      diagnosis: "Migraine",
-      treatment: "Painkillers",
+      patientId: 2,  
+      medicationId: "1234",
+      symptomsId: "4567",
       visitedDate: "2025-03-16",
       doctorId: 2,
       createdAt: "2025-03-16",
@@ -119,61 +116,182 @@ export const STORE_CONTEXT = {
     },
     // Add more patient history here...
   ],
+ 
   medications: [
     {
-      medicationId: 1,
-      patientId: 1,
-      name: "Paracetamol",
-      dosage: "500mg",
+      medicationId: "5124",
+      name: "Oseltamivir",
+      dosage: "75mg",
       frequency: "Twice a day",
-      startDate: "2025-03-15",
-      endDate: "2025-03-20",
-      prescribedByDoctorId: 1,
-      createdAt: "2025-03-15",
-      updatedAt: "2025-03-15",
+      startDate: "2025-04-10",
+      endDate: "2025-04-15",
+      prescribedFor: ["Influenza"],
+      prescribedByDoctorId: 3,
+      createdAt: "2025-04-10",
+      updatedAt: "2025-04-10"
     },
     {
-      medicationId: 2,
-      patientId: 2,
-      name: "Ibuprofen",
-      dosage: "400mg",
-      frequency: "Three times a day",
-      startDate: "2025-03-16",
-      endDate: "2025-03-18",
-      prescribedByDoctorId: 2,
-      createdAt: "2025-03-16",
-      updatedAt: "2025-03-16",
+      medicationId: "1391",
+      name: "Sumatriptan",
+      dosage: "50mg",
+      frequency: "As needed",
+      startDate: "2025-04-12",
+      endDate: "2025-04-17",
+      prescribedFor: ["Migraine"],
+      prescribedByDoctorId: 4,
+      createdAt: "2025-04-12",
+      updatedAt: "2025-04-12"
     },
-    // Add more medications here...
+    {
+      medicationId: "0128",
+      name: "Amoxicillin",
+      dosage: "500mg",
+      frequency: "Three times a day",
+      startDate: "2025-04-08",
+      endDate: "2025-04-14",
+      prescribedFor: ["Pneumonia"],
+      prescribedByDoctorId: 5,
+      createdAt: "2025-04-08",
+      updatedAt: "2025-04-08"
+    }
+  
+  ],
+  
+  symptoms: [
+    {
+      id: "2345",
+      name: "Fever",
+      description: "A temporary increase in body temperature, often due to an infection.",
+      severity: "Moderate",
+      common_causes: ["Viral infection", "Bacterial infection", "Inflammation"]
+    },
+    {
+      id: "6789",
+      name: "Headache",
+      description: "Pain in the head or upper neck region.",
+      severity: "Mild",
+      common_causes: ["Stress", "Dehydration", "Migraine"]
+    },
+    {
+      id: "3456",
+      name: "Cough",
+      description: "A sudden, forceful expulsion of air from the lungs.",
+      severity: "Varies",
+      common_causes: ["Cold", "Allergy", "Respiratory infection"]
+    }
+  ],
+  diagnosis: [
+    {
+      id: "7890",
+      name: "Influenza",
+      description: "A viral infection that affects the respiratory system.",
+      symptoms: ["Fever", "Cough", "Body ache"],
+    
+    },
+    {
+      id: "4567",
+      name: "Migraine",
+      description: "A neurological condition characterized by severe headaches.",
+      symptoms: ["Headache", "Sensitivity to light", "Nausea"],
+     
+    },
+    {
+      id: "1234",
+      name: "Pneumonia",
+      description: "An infection that inflames air sacs in the lungs.",
+      symptoms: ["Cough", "Fever", "Shortness of breath"],
+     
+    }
+  ],
+  treatment: [
+    {
+      id: "6543",
+      name: "Antiviral Medication",
+      description: "Used to treat viral infections like influenza.",
+      conditions_treated: ["Influenza"],
+      method: "Oral administration"
+    },
+    {
+      id: "8765",
+      name: "Pain Relievers",
+      description: "Medications that help alleviate headache symptoms.",
+      conditions_treated: ["Migraine"],
+      method: "Oral administration"
+    },
+    {
+      id: "3210",
+      name: "Antibiotics",
+      description: "Used to treat bacterial infections like pneumonia.",
+      conditions_treated: ["Pneumonia"],
+      method: "Oral or intravenous administration"
+    }
   ],
   procedures: [
     {
       procedureId: 1,
-      patientId: 1,
       description: "Appendectomy",
       cost: 15000,
       date: "2025-03-17",
-      doctorId: 1,
       createdAt: "2025-03-17",
       updatedAt: "2025-03-17",
     },
     {
       procedureId: 2,
-      patientId: 2,
       description: "Cholecystectomy",
       cost: 20000,
       date: "2025-03-18",
-      doctorId: 2,
       createdAt: "2025-03-18",
       updatedAt: "2025-03-18",
     },
     // Add more procedures here...
   ],
+  laboratoryProcedures: [
+    {
+      procedureId: "1123",
+      name: "X-ray",
+      description: "A diagnostic imaging test that uses X-rays to view internal structures.",
+      performedFor: ["Bone fractures", "Lung infections", "Chest abnormalities"],
+      requiredPreparation: ["Remove metallic objects", "Wear a protective apron"],
+      performedBy: "Radiologic Technologist",
+      createdAt: "2025-04-20",
+      updatedAt: "2025-04-20"
+    },
+    {
+      procedureId: "2456",
+      name: "MRI",
+      description: "Magnetic Resonance Imaging that provides detailed images of organs and tissues.",
+      performedFor: ["Brain abnormalities", "Spinal injuries", "Joint disorders"],
+      requiredPreparation: ["Avoid metal objects", "No eating before scan if required"],
+      performedBy: "Radiologist",
+      createdAt: "2025-04-20",
+      updatedAt: "2025-04-20"
+    },
+    {
+      procedureId: "3897",
+      name: "CBC",
+      description: "Complete Blood Count to assess overall health and detect disorders.",
+      performedFor: ["Anemia", "Infections", "Blood clotting issues"],
+      requiredPreparation: ["No special preparation"],
+      performedBy: "Medical Technologist",
+      createdAt: "2025-04-20",
+      updatedAt: "2025-04-20"
+    },
+    {
+      procedureId: "4782",
+      name: "2D Echo",
+      description: "Ultrasound imaging to evaluate heart function and structures.",
+      performedFor: ["Heart disease", "Valve disorders", "Congenital heart defects"],
+      requiredPreparation: ["No caffeine before test", "Wear loose clothing"],
+      performedBy: "Cardiologist",
+      createdAt: "2025-04-20",
+      updatedAt: "2025-04-20"
+    }
+  ],
   labResults: [
     {
       resultId: 1,
       patientId: 1,
-      testName: "CBC",
+      procedureId: "2456",
       result: "Normal",
       testDate: "2025-03-15",
       createdAt: "2025-03-15",
@@ -182,7 +300,7 @@ export const STORE_CONTEXT = {
     {
       resultId: 2,
       patientId: 2,
-      testName: "MRI",
+      procedureId: "1123",
       result: "No abnormalities",
       testDate: "2025-03-16",
       createdAt: "2025-03-16",

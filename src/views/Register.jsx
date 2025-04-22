@@ -28,7 +28,6 @@ const Register = () => {
             })
             return
         }
-        console.log(password, confirmpassword)
         if (password !== confirmpassword) {
             handleNotify({
                 title: 'Warning',
@@ -62,8 +61,7 @@ const Register = () => {
         }
         nurses.push(nurseDetails)
         users.push(loginDetails)
-        console.log(nurses)
-        console.log(users)
+       
 
     }
 

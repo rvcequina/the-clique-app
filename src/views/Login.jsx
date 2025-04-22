@@ -5,22 +5,17 @@ import { notifyContext } from "@/providers/notification/context";
 import { storeContext } from "@/providers/store/context";
 
 const Login = () => {
-    const { notify, handleNotify } = useContext(notifyContext);
-    const { store, setCurrentUser } = useContext(storeContext);
-
+    const { handleNotify } = useContext(notifyContext);
+    const { store, setCurrentUser, getNurseById, getPatientById } = useContext(storeContext);
 
 
     let navigate = useNavigate();
 
-
-    const handleSubmit = (formData) => {
-        const { users, nurses } = store
-
+    const handleSubmit = async (formData) => {
+        const { users } = store
 
         const username = formData.get("username");
         const password = formData.get("password");
-
-
 
         const checkUser = users.some(item => item.username == username)
 
@@ -32,23 +27,21 @@ const Login = () => {
             })
             return
         }
-        //refactor check found user credential rather than iteration
-        const checkPass = users.some(item => item.password == password)
-        if (!checkPass) {
+
+        const userData = users.find(item => item.username == username)
+        if (userData.password != password) {
             handleNotify({
-                title:'Warning',
+                title: 'Warning',
                 messages: 'Sign in problem occured',
                 status: 'warn',
             })
             return
         }
-
-        const user = nurses.find(item => item.nurseId == users.find(item => item.username == username).nurseId)
-
-        setCurrentUser(user)
+        let userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId)
+        setCurrentUser(userDetails)
         handleNotify({
-            title:'Welcome',
-            messages: `${user.firstName}`,
+            title: 'Welcome',
+            messages: `${userDetails.firstName} ${userDetails.lastName}`,
             status: 'success',
         })
         navigate("/dashboard");

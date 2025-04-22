@@ -102,10 +102,10 @@ const CardBarChart = () => {
         if (chartInstance.current) {
             chartInstance.current.destroy();
         }
-        console.log(chartInstance.current)
+      
         // Create the new chart
         chartInstance.current = new Chart(chartRef.current, config);
-        console.log(chartInstance.current)
+    
 
         // Cleanup function to destroy the chart instance on unmount
         // return () => {

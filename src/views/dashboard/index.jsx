@@ -8,11 +8,7 @@ import CardPageVisits from "@/components/Cards/CardPageVisits";
 import CardSocialTraffic from "@/components/Cards/CardSocialTraffic";
 
 const Index=()=> {
-  const { currentUser  } = useContext(storeContext);
-
-  useEffect(()=>{
-    console.log(currentUser)
-  })
+  
   return (
     <>
       <div className="flex flex-wrap">
