@@ -1,7 +1,7 @@
 @import "./theme.css";
 @import "tailwindcss";
 @import "./animation.css";
-
+@import "./custom.css"; 
 html{
     scroll-behavior: smooth;
 }

@@ -1,23 +1,25 @@
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { storeContext, STORE_CONTEXT } from "@/providers/store/context.jsx";
+import axios from "axios";
 
 const StoreProvider = ({ children }) => {
     const [store, setStore] = useState(STORE_CONTEXT);
     const [currentUser, setCurrentUser] = useState()
 
+    const patientListUrl = 'https://dummyjson.com/c/aa70-048b-49e3-9016'
+
     const getTotalNurses = () => {
         return store.nurses.length
     }
 
-    const getTotalPatients = () => {
+    const getTotalPatients =  () => {
 
         return store.patients.length
     }
 
     const getTotalAdmitted = () => {
         const admitted = store.patients.filter(item => item.isAdmitted == true)
-
         return admitted.length
     }
 
@@ -60,21 +62,21 @@ const StoreProvider = ({ children }) => {
         const patientInfo = await store.patients.find(item => item.patientId == id)
         const stationDetails = await getStationById(patientInfo.stationId)
         const doctorDetails = await getDoctorById(patientInfo.doctorId)
-        if (!userInfo && !patientInfo ) {
+        if (!userInfo && !patientInfo) {
             return
         }
-        if (!patientInfo.isAdmitted ) {
+        if (!patientInfo.isAdmitted) {
             return
         }
         let patientDetails = {
             patientId: id,
-            firstName: patientInfo.firstName?patientInfo.firstName:'',
-            lastName: patientInfo.lastName?patientInfo.lastName:'',
-            dob: patientInfo.dob?patientInfo.dob:'',
-            gender: patientInfo.gender?patientInfo.gender:'',
-            contactNumber: patientInfo.contactNumber?patientInfo.contactNumber:'',
-            address: patientInfo.address?patientInfo.address:'',
-            status: patientInfo.status?patientInfo.status:'',
+            firstName: patientInfo.firstName ? patientInfo.firstName : '',
+            lastName: patientInfo.lastName ? patientInfo.lastName : '',
+            dob: patientInfo.dob ? patientInfo.dob : '',
+            gender: patientInfo.gender ? patientInfo.gender : '',
+            contactNumber: patientInfo.contactNumber ? patientInfo.contactNumber : '',
+            address: patientInfo.address ? patientInfo.address : '',
+            status: patientInfo.status ? patientInfo.status : '',
             loginId: userInfo.loginId ? userInfo.loginId : '',
             userType: userInfo.userType ? userInfo.userType : '',
             username: userInfo.username ? userInfo.username : '',
@@ -83,12 +85,12 @@ const StoreProvider = ({ children }) => {
                 stationName: stationDetails.stationName ? stationDetails.stationName : '',
                 location: stationDetails.location ? stationDetails.location : '',
             },
-            doctorId:     {
-                doctorId: doctorDetails.doctorId?patientInfo.doctorId:'',
-                fullName: doctorDetails.fullName?patientInfo.fullName:'',
-                specialty: doctorDetails.specialty?patientInfo.specialty:'',
-                contactNumber: doctorDetails.contactNumber?patientInfo.contactNumber:'',
-              },
+            doctorId: {
+                doctorId: doctorDetails.doctorId ? patientInfo.doctorId : '',
+                fullName: doctorDetails.fullName ? patientInfo.fullName : '',
+                specialty: doctorDetails.specialty ? patientInfo.specialty : '',
+                contactNumber: doctorDetails.contactNumber ? patientInfo.contactNumber : '',
+            },
             isAdmitted: patientInfo.isAdmitted,
         }
         return patientDetails

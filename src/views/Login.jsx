@@ -37,14 +37,16 @@ const Login = () => {
             })
             return
         }
-        let userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId)
-        setCurrentUser(userDetails)
+        const userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId)
+        setCurrentUser(JSON.parse(userDetails))
+        localStorage.setItem("user", JSON.stringify(userDetails) )
         handleNotify({
             title: 'Welcome',
             messages: `${userDetails.firstName} ${userDetails.lastName}`,
             status: 'success',
         })
-        navigate("/dashboard");
+        const url = userData.userType == 1 ? "/dashboard/admin":"/dashboard/patient"
+        navigate(url);
 
     }
 

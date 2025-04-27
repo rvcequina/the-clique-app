@@ -7,7 +7,7 @@ import CardBarChart from "@/components/Cards/CardBarChart";
 import CardPageVisits from "@/components/Cards/CardPageVisits";
 import CardSocialTraffic from "@/components/Cards/CardSocialTraffic";
 
-const Index=()=> {
+const Analytics=()=> {
   
   return (
     <>
@@ -31,4 +31,4 @@ const Index=()=> {
   );
 }
 
-export default Index
+export default Analytics

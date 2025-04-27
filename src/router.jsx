@@ -4,9 +4,11 @@ import { createBrowserRouter } from "react-router";
 import Unauth from "@/layouts/Unauth";
 import Home from '@/views/Home'
 import Login from "@/views/Login";
-import Register from "./views/Register";
-import Admin from "@/layouts/Admin";
-import Index from "@/views/dashboard";
+import Register from "@/views/Register";
+import Dashboard from "@/layouts/Dashboard";
+import Analytics from "@/views/dashboard/admin/analytics";
+import PatientList from "./views/dashboard/admin/patienList";
+import NotFound from "@/views/NotFound";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -23,14 +25,32 @@ const router = createBrowserRouter([
             },
             {
                 path: "dashboard",
-                Component: Admin,
+                Component: Dashboard,
                 children: [
-                    { index: true, Component: Index },
+                    {
+                        path: "admin",
+
+                        children: [
+                            { index: true, Component: Analytics },
+                        ],
+                    },
+                    {
+                        path: "patients",
+
+                        children: [
+                            { index: true, Component: PatientList },
+                        ],
+                    },
                 ],
             },
 
         ],
+
     },
+    {
+        path: "*",
+        Component: NotFound
+    }
 
 ]);
 

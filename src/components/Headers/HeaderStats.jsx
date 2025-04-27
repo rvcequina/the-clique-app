@@ -1,11 +1,29 @@
-import React,{useContext} from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // components
 import CardStats from "@/components/Cards/CardStats";
 import { storeContext } from "@/providers/store/context";
 
-const HeaderStats=()=> {
-    const { store, getTotalNurses,getTotalPatients,getTotalAdmitted } = useContext(storeContext);
+const HeaderStats = () => {
+  const { getTotalNurses, getTotalPatients, getTotalAdmitted, store } = useContext(storeContext);
+  const [total, setTotal] = useState({
+    nurses: 0,
+    patients: 0,
+    admitted: 0,
+    stats: '49,65%'
+  })
+
+  useEffect(() => {
+    getTotal()
+  }, [store])
+
+  const getTotal = () => {
+
+    total.nurses = getTotalNurses()
+    total.patients = getTotalPatients()
+    total.admitted = getTotalAdmitted()
+
+  }
 
   return (
     <>
@@ -18,7 +36,7 @@ const HeaderStats=()=> {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Total Nurses"
-                  statTitle={getTotalNurses()}
+                  statTitle={total.nurses}
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -30,7 +48,7 @@ const HeaderStats=()=> {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Total Patients"
-                  statTitle={getTotalPatients()}
+                  statTitle={total.patients}
                   statArrow="down"
                   statPercent="3.48"
                   statPercentColor="text-red-500"
@@ -42,7 +60,7 @@ const HeaderStats=()=> {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Total Admitted"
-                  statTitle={getTotalAdmitted()}
+                  statTitle={total.admitted}
                   statIconName="fas fa-users"
                   statIconColor="bg-pink-500"
                 />
@@ -50,7 +68,7 @@ const HeaderStats=()=> {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Readmission Rate"
-                  statTitle="49,65%"
+                  statTitle={total.stats}
                   statArrow="up"
                   statPercent="12"
                   statPercentColor="text-emerald-500"

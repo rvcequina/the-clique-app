@@ -1,17 +1,22 @@
 /*eslint-disable*/
-import React, { useEffect, useContext, useState } from "react"
+import React, { useEffect, useContext, useState, useMemo } from "react"
 import { NavLink } from "react-router"
+import { useLocation } from "react-router"
 
 
 import UserDropdown from "@/components/Dropdowns/UserDropdown"
-import { storeContext } from "@/providers/store/context"
-const Sidebar = () => {
+
+const Sidebar = ({ user }) => {
   const [collapseShow, setCollapseShow] = React.useState("hidden")
-  const { currentUser } = useContext(storeContext)
+
   const [isAdmin, setIsAdmin] = useState(true)
-  useEffect(() => {
-    setIsAdmin(currentUser.userType == 1 ? true : false)
-  }, [currentUser])
+  const location = useLocation()
+  useMemo(() => {
+    if (user) {
+      setIsAdmin(user.userType == 1 ? true : false)
+    }
+
+  }, [user])
 
   return (
     <>
@@ -97,16 +102,18 @@ const Sidebar = () => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/dashboard") !== -1
+                        (location.pathname == "/dashboard/admin/"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/dashboard"
+                      to="admin/"
+                      replace
+
                     >
                       <i
                         className={
                           "fas fa-tv mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/dashboard") !== -1
+                          (location.pathname == "/dashboard/admin/"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -119,16 +126,16 @@ const Sidebar = () => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/patients") !== -1
+                        (location.pathname == "/dashboard/patients/"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/patients"
+                      to="patients/"
                     >
                       <i
                         className={
                           "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/patients") !== -1
+                          (location.pathname == "/dashboard/patients/"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
