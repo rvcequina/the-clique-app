@@ -13,7 +13,7 @@ const StoreProvider = ({ children }) => {
         return store.nurses.length
     }
 
-    const getTotalPatients =  () => {
+    const getTotalPatients = () => {
 
         return store.patients.length
     }
@@ -57,17 +57,20 @@ const StoreProvider = ({ children }) => {
         return stationDetails
     }
 
-    const getPatientById = async (id) => {
+    const getPatientById = async (id, type) => {
+
         const userInfo = await store.users.find(item => item.patientId == id)
         const patientInfo = await store.patients.find(item => item.patientId == id)
         const stationDetails = await getStationById(patientInfo.stationId)
         const doctorDetails = await getDoctorById(patientInfo.doctorId)
+
         if (!userInfo && !patientInfo) {
             return
         }
-        if (!patientInfo.isAdmitted) {
+        if (!patientInfo.isAdmitted && type == 2) {
             return
         }
+        
         let patientDetails = {
             patientId: id,
             firstName: patientInfo.firstName ? patientInfo.firstName : '',
@@ -85,14 +88,15 @@ const StoreProvider = ({ children }) => {
                 stationName: stationDetails.stationName ? stationDetails.stationName : '',
                 location: stationDetails.location ? stationDetails.location : '',
             },
-            doctorId: {
-                doctorId: doctorDetails.doctorId ? patientInfo.doctorId : '',
-                fullName: doctorDetails.fullName ? patientInfo.fullName : '',
-                specialty: doctorDetails.specialty ? patientInfo.specialty : '',
-                contactNumber: doctorDetails.contactNumber ? patientInfo.contactNumber : '',
+            doctor: {
+                doctorId: doctorDetails.doctorId ? doctorDetails.doctorId : '',
+                fullName: doctorDetails.fullName ? doctorDetails.fullName : '',
+                specialty: doctorDetails.specialty ? doctorDetails.specialty : '',
+                contactNumber: doctorDetails.contactNumber ? doctorDetails.contactNumber : '',
             },
             isAdmitted: patientInfo.isAdmitted,
         }
+     
         return patientDetails
     }
 

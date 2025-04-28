@@ -37,8 +37,8 @@ const Login = () => {
             })
             return
         }
-        const userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId)
-        setCurrentUser(JSON.parse(userDetails))
+        const userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId,userData.userType)
+        setCurrentUser(userDetails)
         localStorage.setItem("user", JSON.stringify(userDetails) )
         handleNotify({
             title: 'Welcome',

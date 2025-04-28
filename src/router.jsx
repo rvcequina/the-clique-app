@@ -32,10 +32,11 @@ const router = createBrowserRouter([
 
                         children: [
                             { index: true, Component: Analytics },
+                            { path: "patient-list", Component: PatientList }
                         ],
                     },
                     {
-                        path: "patients",
+                        path: "patient",
 
                         children: [
                             { index: true, Component: PatientList },

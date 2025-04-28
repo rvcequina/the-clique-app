@@ -12,7 +12,7 @@ export const STORE_CONTEXT = {
       address: "123 Elm Street",
       stationId: 1,
       doctorId: 1,
-      isAdmitted:true,
+      isAdmitted: true,
       createdAt: "2025-03-01",
       updatedAt: "2025-03-28",
     },
@@ -24,10 +24,23 @@ export const STORE_CONTEXT = {
       gender: "Female",
       contactNumber: "0987654321",
       address: "456 Oak Avenue",
-      status:'discharged',
       stationId: 2,
       doctorId: 2,
-      isAdmitted:false,
+      isAdmitted: false,
+      createdAt: "2025-03-02",
+      updatedAt: "2025-03-29",
+    },
+    {
+      patientId: 3,
+      firstName: "Morris",
+      lastName: "Baker",
+      dob: "1990-02-02",
+      gender: "Female",
+      contactNumber: "0987654321",
+      address: "456 Oak Avenue",
+      stationId: 2,
+      doctorId: 2,
+      isAdmitted: true,
       createdAt: "2025-03-02",
       updatedAt: "2025-03-29",
     },
@@ -106,7 +119,7 @@ export const STORE_CONTEXT = {
     },
     {
       historyId: 2,
-      patientId: 2,  
+      patientId: 2,
       medicationId: "1234",
       symptomsId: "4567",
       visitedDate: "2025-03-16",
@@ -116,7 +129,7 @@ export const STORE_CONTEXT = {
     },
     // Add more patient history here...
   ],
- 
+
   medications: [
     {
       medicationId: "5124",
@@ -154,9 +167,9 @@ export const STORE_CONTEXT = {
       createdAt: "2025-04-08",
       updatedAt: "2025-04-08"
     }
-  
+
   ],
-  
+
   symptoms: [
     {
       id: "2345",
@@ -186,21 +199,21 @@ export const STORE_CONTEXT = {
       name: "Influenza",
       description: "A viral infection that affects the respiratory system.",
       symptoms: ["Fever", "Cough", "Body ache"],
-    
+
     },
     {
       id: "4567",
       name: "Migraine",
       description: "A neurological condition characterized by severe headaches.",
       symptoms: ["Headache", "Sensitivity to light", "Nausea"],
-     
+
     },
     {
       id: "1234",
       name: "Pneumonia",
       description: "An infection that inflames air sacs in the lungs.",
       symptoms: ["Cough", "Fever", "Shortness of breath"],
-     
+
     }
   ],
   treatment: [
@@ -308,11 +321,11 @@ export const STORE_CONTEXT = {
     },
     // Add more lab results here...
   ],
-  users:[
+  users: [
     {
       loginId: 1,
       patientId: 1,
-      userType:2,
+      userType: 2,
       username: "john_doe",
       password: "secure123",
       lastLogin: "2025-03-27"
@@ -320,7 +333,7 @@ export const STORE_CONTEXT = {
     {
       loginId: 2,
       patientId: 2,
-      userType:2,
+      userType: 2,
       username: "jane_smith",
       password: "secure456",
       lastLogin: "2025-03-28"
@@ -328,7 +341,7 @@ export const STORE_CONTEXT = {
     {
       loginId: 3,
       nurseId: 1,
-      userType:1,
+      userType: 1,
       username: "swift_taylor",
       password: "nurse123",
       lastLogin: "2025-03-27"
@@ -336,9 +349,17 @@ export const STORE_CONTEXT = {
     {
       loginId: 4,
       nurseId: 2,
-      userType:1,
+      userType: 1,
       username: "michael_brown",
       password: "nurse456",
+      lastLogin: "2025-03-28"
+    },
+    {
+      loginId: 5,
+      patientId: 3,
+      userType: 2,
+      username: "morris_baker",
+      password: "secure456",
       lastLogin: "2025-03-28"
     },
   ],

@@ -1,4 +1,4 @@
-import React,{useContext,useEffect,useState} from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import asset1 from '../../assets/img/team-1-800x800.jpg'
 import asset2 from '../../assets/img/team-2-800x800.jpg'
@@ -6,12 +6,51 @@ import asset3 from '../../assets/img/team-3-800x800.jpg'
 import asset4 from '../../assets/img/team-4-470x470.png'
 // components
 import { storeContext } from "@/providers/store/context";
-
+import useSearchPatient from '@/hooks/useSearchPatient';
+import { useMatches } from "react-router";
 // import TableDropdown from "components/Dropdowns/TableDropdown.js";
 
 export default function CardPatients({ color }) {
-  const {store}=useContext(storeContext)
-  
+  const { store, getPatientById } = useContext(storeContext)
+  const [patientList, setPatientList] = useState([])
+  const { searchResults, searchInArray } = useSearchPatient();
+
+
+
+
+
+  const handleSearch = (formData) => {
+    const query = formData.get("query");
+
+    searchInArray(patientList, query);
+
+
+  }
+
+  useMemo(() => {
+
+    store.patients.map(async item => {
+      const currentPatient = await getPatientById(item.patientId);
+      if (currentPatient) {
+        setPatientList(prev => {
+          if (!prev.some(patient => patient.patientId === currentPatient.patientId)) {
+            // Only add the patient if they don't already exist in the list
+            return [...prev, currentPatient];
+          }
+          return prev; // No changes if the patient is already present
+        });
+      }
+    });
+
+
+  }, [store.patients])
+
+  useEffect(() => {
+    if (patientList) {
+      searchInArray(patientList, '');
+    }
+  }, [patientList])
+
 
 
   return (
@@ -34,24 +73,25 @@ export default function CardPatients({ color }) {
                 Patient List
               </h3>
             </div>
-            <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3">
-            <div className="relative flex w-full flex-wrap items-stretch">
-              <span className="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
-                <i className="fas fa-search"></i>
-              </span>
-              <input
-                type="text"
-                placeholder="Search here..."
-                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"
-              />
-            </div>
-          </form>
+            <form action={handleSearch} className="flex flex-row flex-wrap items-center lg:ml-auto mr-3">
+              <div className="relative flex w-full flex-wrap items-stretch">
+                <span className="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+                  <i className="fas fa-search"></i>
+                </span>
+                <input
+                  type="text"
+                  name="query"
+                  placeholder="Search here..."
+                  className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"
+                />
+              </div>
+            </form>
           </div>
         </div>
-        
+
         <div className="block w-full overflow-x-auto">
           {/* Projects table */}
-          
+
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
@@ -93,7 +133,7 @@ export default function CardPatients({ color }) {
                       : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
                   }
                 >
-                  Medications
+                  Station
                 </th>
                 <th
                   className={
@@ -112,69 +152,63 @@ export default function CardPatients({ color }) {
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                       : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
                   }
-                ></th>
+                >Actions</th>
               </tr>
             </thead>
             <tbody>
               {
-                store.patients.map(item=>{
-                  return(<tr>
+                searchResults?.map(item => {
+                  return (<tr key={item.patientId}>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                      <img
-                        
-                        className="h-12 w-12 bg-white rounded-full border"
+                      <div
+
+                        className="h-12 w-12 bg-gray-400 text-black flex text-lg    justify-center items-center rounded-full border"
                         alt="..."
-                      ></img>{" "}
+                      >{item.firstName?.split("")[0]} {item.lastName?.split("")[0]}</div>{" "}
                       <span
                         className={
                           "ml-3 font-bold " +
                           +(color === "light" ? "text-blueGray-600" : "text-white")
                         }
                       >
-                        John Doe
+                        {`${item.firstName} ${item.lastName}`}
                       </span>
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                      Bacolod City
+                      {item.address}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                      <i className="fas fa-circle text-orange-500 mr-2"></i> 35
+                      {new Date().getFullYear() - new Date(item.dob).getFullYear()}
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                       <div className="flex">
-                        <img
-                          src={asset1}
-                          alt="..."
-                          className="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow"
-                        ></img>
-                        <img
-                          src={asset2}
-                          alt="..."
-                          className="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4"
-                        ></img>
-                        <img
-                          src={asset3}
-                          alt="..."
-                          className="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4"
-                        ></img>
-                        <img
-                          src={asset4}
-                          alt="..."
-                          className="w-10 h-10 rounded-full border-2 border-blueGray-50 shadow -ml-4"
-                        ></img>
+                        {item.assignedStation?.stationName}
                       </div>
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                       <div className="flex items-center">
-                        <span className="mr-2">Inpatient</span>
-                        <div className="relative w-full">
-                          <div className="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                            <div
-                              style={{ width: "60%" }}
-                              className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
-                            ></div>
-                          </div>
-                        </div>
+                        <span className="mr-2 flex w-[5rem]  justify-between items-center gap-2">
+                          {item.isAdmitted ?
+                            <div className="relative w-[0.5rem]">
+                              <div className="overflow-hidden h-2 text-xs flex rounded bg-green-200">
+                                <div
+                                  style={{ width: "100%" }}
+                                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-500"
+                                ></div>
+                              </div>
+                            </div> :
+                            <div className="relative w-[0.5rem]">
+                              <div className="overflow-hidden h-2 text-xs flex rounded bg-red-200">
+                                <div
+                                  style={{ width: "100%" }}
+                                  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
+                                ></div>
+                              </div>
+                            </div>
+                          }
+                          <div>{item.isAdmitted ? 'Admitted' : 'Discharged'}</div>
+                        </span>
+
                       </div>
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
@@ -183,8 +217,8 @@ export default function CardPatients({ color }) {
                   </tr>)
                 })
               }
-              
-           
+
+
             </tbody>
           </table>
         </div>
