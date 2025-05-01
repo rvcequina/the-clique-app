@@ -5,6 +5,7 @@ import Notification from "@/components/Alerts/Notification";
 const NotificationProvider = ({ children }) => {
     const [notification, setNotification] = useState(NOTIFY_CONTEXT);
     const [notify, setNotify] = useState(false)
+ 
 
 
     const handleNotify = (data)=>{
@@ -16,6 +17,8 @@ const NotificationProvider = ({ children }) => {
         setNotify(false)
        
     }
+
+  
 
 
     return (

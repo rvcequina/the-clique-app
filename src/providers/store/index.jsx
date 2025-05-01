@@ -24,7 +24,11 @@ const StoreProvider = ({ children }) => {
     }
 
     const getCurrentUser = () => {
-        return currentUser
+        const getUser = localStorage.getItem('user');
+        let user = currentUser ? currentUser :JSON.parse(getUser)
+        setCurrentUser(user)
+
+        return user
     }
 
     const getNurseById = async (id) => {

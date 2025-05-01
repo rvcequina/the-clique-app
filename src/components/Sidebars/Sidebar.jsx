@@ -71,6 +71,7 @@ const Sidebar = ({ user }) => {
                     onClick={() => setCollapseShow("hidden")}
                   >
                     <i className="fas fa-times"></i>
+                    
                   </button>
                 </div>
               </div>
@@ -163,16 +164,17 @@ const Sidebar = ({ user }) => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/settings") !== -1
+                        (location.pathname == "/dashboard/patient/"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/settings"
+                      to="/dashboard/patient/"
+                      replace
                     >
                       <i
                         className={
-                          "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/settings") !== -1
+                          "fas fa-user mr-2 text-sm " +
+                          (location.pathname == "/dashboard/patient/"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -185,16 +187,16 @@ const Sidebar = ({ user }) => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/settings") !== -1
+                        (location.pathname == "/dashboard/patient/medications"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/settings"
+                      to="/dashboard/patient/medications"
                     >
                       <i
                         className={
-                          "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/settings") !== -1
+                          "fas fa-medkit mr-2 text-sm " +
+                          (location.pathname == "/dashboard/patient/medications"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -207,16 +209,16 @@ const Sidebar = ({ user }) => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/settings") !== -1
+                        (location.pathname == "/dashboard/patient/results"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/settings"
+                      to="/dashboard/patient/results"
                     >
                       <i
                         className={
                           "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/settings") !== -1
+                          (location.pathname == "/dashboard/patient/results"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -228,16 +230,16 @@ const Sidebar = ({ user }) => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/settings") !== -1
+                        (location.pathname == "/dashboard/patient/recommendations"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/settings"
+                      to="/dashboard/patient/recommendations"
                     >
                       <i
                         className={
-                          "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/settings") !== -1
+                          "fas fa-user-md mr-2 text-sm " +
+                          (location.pathname == "/dashboard/patient/recommendations"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
