@@ -10,6 +10,7 @@ import Analytics from "@/views/dashboard/admin/analytics";
 import PatientList from "./views/dashboard/admin/patienList";
 import NotFound from "@/views/NotFound";
 import PatientProfile from "./views/dashboard/patient/patientProfile";
+import Medicatons from "./views/dashboard/patient/medications";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
 
                         children: [
                             { index: true, Component: PatientProfile },
-                            { path: "medications", Component: PatientList },
+                            { path: "medications", Component: Medicatons },
                             { path: "results", Component: PatientList },
                             { path: "recommendations", Component: PatientList },
                         ],

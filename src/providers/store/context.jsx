@@ -105,23 +105,31 @@ export const STORE_CONTEXT = {
     },
     // Add more nurses here...
   ],
+  //migrian
   patientHistory: [
     {
       historyId: 1,
       patientId: 1,
       medicationId: "1391",
-      symptomsId: "4567",
+      symptomsId: "6789",
+      diagnosisId:"4567",
+      treatmentId:"8765",
       visitedDate: "2025-03-15",
+      resultId:"1000",
       doctorId: 1,
       createdAt: "2025-03-15",
       updatedAt: "2025-03-15",
 
     },
+    //pnuemonia
     {
       historyId: 2,
       patientId: 2,
-      medicationId: "1234",
-      symptomsId: "4567",
+      medicationId: "0128",
+      symptomsId: "1234",
+      diagnosisId:"4567",
+      treatmentId:"3210",
+      resultId:"1001",
       visitedDate: "2025-03-16",
       doctorId: 2,
       createdAt: "2025-03-16",
@@ -302,7 +310,7 @@ export const STORE_CONTEXT = {
   ],
   labResults: [
     {
-      resultId: 1,
+      resultId: "1000",
       patientId: 1,
       procedureId: "2456",
       result: "Normal",
@@ -311,7 +319,7 @@ export const STORE_CONTEXT = {
       updatedAt: "2025-03-15",
     },
     {
-      resultId: 2,
+      resultId: "1001",
       patientId: 2,
       procedureId: "1123",
       result: "No abnormalities",

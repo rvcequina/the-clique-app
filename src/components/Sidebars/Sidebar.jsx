@@ -2,7 +2,7 @@
 import React, { useEffect, useContext, useState, useMemo } from "react"
 import { NavLink } from "react-router"
 import { useLocation } from "react-router"
-
+import Logo from '@/assets/img/logo.svg'
 
 import UserDropdown from "@/components/Dropdowns/UserDropdown"
 
@@ -31,12 +31,30 @@ const Sidebar = ({ user }) => {
             <i className="fas fa-bars"></i>
           </button>
           {/* Brand */}
-          <NavLink
+          {/* <NavLink
             className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             to="/"
           >
             The Clique
-          </NavLink>
+          </NavLink> */}
+          <div className="flex items-center gap-4 mr-4">
+            <NavLink
+
+              to="/"
+            >
+              <img
+                alt="..."
+                src={Logo}
+                className="w-10"
+              />
+            </NavLink >
+            <NavLink
+              className=" text-sm font-bold leading-relaxed inline-block  py-2 whitespace-nowrap uppercase border-0 outline-none"
+              to="/"
+            >
+              <div className="text-cyan-500"> The Clique</div>
+            </NavLink >
+          </div>
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
             <li className="inline-block relative">
@@ -57,12 +75,30 @@ const Sidebar = ({ user }) => {
             <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
-                  <NavLink
+                  {/* <NavLink
                     className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     to="/"
                   >
                     The Clique
-                  </NavLink>
+                  </NavLink> */}
+                  <div className="flex items-center flex-col mr-4">
+                    <NavLink
+
+                      to="/"
+                    >
+                      <img
+                        alt="..."
+                        src={Logo}
+                        className="w-10"
+                      />
+                    </NavLink >
+                    <NavLink
+                      className=" text-sm font-bold leading-relaxed inline-block  py-2 whitespace-nowrap uppercase border-0 outline-none"
+                      to="/"
+                    >
+                      <div className="text-cyan-500"> The Clique</div>
+                    </NavLink >
+                  </div>
                 </div>
                 <div className="w-6/12 flex justify-end">
                   <button
@@ -71,21 +107,13 @@ const Sidebar = ({ user }) => {
                     onClick={() => setCollapseShow("hidden")}
                   >
                     <i className="fas fa-times"></i>
-                    
+
                   </button>
                 </div>
               </div>
             </div>
-            {/* Form */}
-            <form className="mt-6 mb-4 md:hidden">
-              <div className="mb-3 pt-0">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="border-0 px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
-                />
-              </div>
-            </form>
+            <div className="h-0 my-2 border border-solid border-blueGray-100" />
+
 
 
             {isAdmin ?
@@ -256,6 +284,7 @@ const Sidebar = ({ user }) => {
 
           </div>
         </div>
+
       </nav>
     </>
   );

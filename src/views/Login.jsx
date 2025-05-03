@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from "react-router";
 import React, { useContext } from "react";
+import { toast } from "sonner"
 
-import { notifyContext } from "@/providers/notification/context";
 import { storeContext } from "@/providers/store/context";
 
 const Login = () => {
-    const { handleNotify } = useContext(notifyContext);
+
     const { store, setCurrentUser, getNurseById, getPatientById } = useContext(storeContext);
 
 
@@ -20,30 +20,29 @@ const Login = () => {
         const checkUser = users.some(item => item.username == username)
 
         if (!checkUser) {
-            handleNotify({
-                title: 'Warning',
-                messages: 'Sign in problem occured',
-                status: 'warn',
+            toast.error("Error Alert", {
+                description: "There seems to be an issue with you credentials",
             })
             return
         }
 
         const userData = users.find(item => item.username == username)
         if (userData.password != password) {
-            handleNotify({
-                title: 'Warning',
-                messages: 'Sign in problem occured',
-                status: 'warn',
+            toast.error("Error Alert", {
+                description: "There seems to be an issue with you credentials",
             })
             return
         }
-        const userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId,userData.userType)
+        const userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId, userData.userType)
         setCurrentUser(userDetails)
-        localStorage.setItem("user", JSON.stringify(userDetails) )
-        handleNotify({
-            title: 'Welcome',
-            messages: `${userDetails.firstName} ${userDetails.lastName}`,
-            status: 'success',
+        localStorage.setItem("user", JSON.stringify(userDetails))
+ 
+
+        toast.success("Login Successful", {
+            description: "Sunday, December 03, 2023 at 9:00 AM",
+        })
+        toast.success("Welcome", {
+            description: `${userDetails.firstName} ${userDetails.lastName}`,
         })
         const url = userData.userType == 1 ? "/dashboard/admin":"/dashboard/patient"
         navigate(url);

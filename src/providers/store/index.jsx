@@ -26,8 +26,6 @@ const StoreProvider = ({ children }) => {
     const getCurrentUser = () => {
         const getUser = localStorage.getItem('user');
         let user = currentUser ? currentUser :JSON.parse(getUser)
-        setCurrentUser(user)
-
         return user
     }
 
@@ -109,6 +107,14 @@ const StoreProvider = ({ children }) => {
         return docotrDetails
     }
 
+    const userLogout = ()=>{
+    
+    console.log('Component will unmount');
+    setCurrentUser()
+    localStorage.removeItem("user");
+            
+    }
+
 
     return (
         <storeContext.Provider
@@ -122,7 +128,8 @@ const StoreProvider = ({ children }) => {
                 getTotalAdmitted,
                 getCurrentUser,
                 getNurseById,
-                getPatientById
+                getPatientById,
+                userLogout
             }}
         >
             {children}

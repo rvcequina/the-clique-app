@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import { NavLink, useNavigate } from "react-router";
 import Logo from '@/assets/img/logo.svg'
 import { storeContext } from "@/providers/store/context";
@@ -11,7 +11,6 @@ const Navbar = ({ isAuth }) => {
         event.preventDefault();
         navigate(-1); // Go back one step
     };
-
 
     return (
         <nav className="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
@@ -93,7 +92,7 @@ const Navbar = ({ isAuth }) => {
                                             </li> : <li className="flex items-center">
                                                 <NavLink
                                                     className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                                                    to="#" onClick={handleGoBack}
+                                                    to="/" 
                                                 >
                                                     Go Back
                                                 </NavLink >
@@ -171,7 +170,7 @@ const Navbar = ({ isAuth }) => {
                                             :
                                             <NavLink
                                                 className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
-                                                to="#" onClick={handleGoBack}
+                                                to="/" 
                                             >
                                                 <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
                                                     Go back

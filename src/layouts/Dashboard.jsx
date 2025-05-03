@@ -22,7 +22,7 @@ const Dashboard = () => {
         setCurrentUser(JSON.parse(getUser))
       }
       else{
-        navigate('/atuh/login')
+        navigate('/auth/login')
       }
     }
   }
