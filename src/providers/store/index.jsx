@@ -25,7 +25,7 @@ const StoreProvider = ({ children }) => {
 
     const getCurrentUser = () => {
         const getUser = localStorage.getItem('user');
-        let user = currentUser ? currentUser :JSON.parse(getUser)
+        let user = currentUser ? currentUser : JSON.parse(getUser)
         return user
     }
 
@@ -72,7 +72,7 @@ const StoreProvider = ({ children }) => {
         if (!patientInfo.isAdmitted && type == 2) {
             return
         }
-        
+
         let patientDetails = {
             patientId: id,
             firstName: patientInfo.firstName ? patientInfo.firstName : '',
@@ -98,7 +98,7 @@ const StoreProvider = ({ children }) => {
             },
             isAdmitted: patientInfo.isAdmitted,
         }
-     
+
         return patientDetails
     }
 
@@ -107,12 +107,43 @@ const StoreProvider = ({ children }) => {
         return docotrDetails
     }
 
-    const userLogout = ()=>{
-    
-    console.log('Component will unmount');
-    setCurrentUser()
-    localStorage.removeItem("user");
-            
+    const getPatientMedicationByid = async (id) => {
+
+
+        const patientHstory = await store.patientHistory.filter(item => item.patientId == id)
+        let medications
+        let medicationHistory = []
+        let patientHistoryDetails = {
+            id: '',
+            name: '',
+            dosage: '',
+            frequency: '',
+            visitedDate: ''
+        }
+        patientHstory.map( data => {
+          
+            medications =  store.medications.find(item => item.medicationId == data.medicationId)
+            patientHistoryDetails = {
+                id: data.medicationId,
+                name: medications.name,
+                dosage: medications.dosage,
+                frequency: medications.frequency,
+                visitedDate: data.visitedDate
+            }
+            medicationHistory.push(patientHistoryDetails)
+           
+        })
+       
+        return medicationHistory
+
+    }
+
+    const userLogout = () => {
+
+        console.log('Component will unmount');
+        setCurrentUser()
+        localStorage.removeItem("user");
+
     }
 
 
@@ -129,6 +160,7 @@ const StoreProvider = ({ children }) => {
                 getCurrentUser,
                 getNurseById,
                 getPatientById,
+                getPatientMedicationByid,
                 userLogout
             }}
         >
