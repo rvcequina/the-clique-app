@@ -2,8 +2,8 @@ import { NavLink, useNavigate } from "react-router";
 import React, { useContext } from "react";
 import { notifyContext } from "@/providers/notification/context";
 import { storeContext } from "@/providers/store/context";
-import asset2 from '@/assets/img/team-2-800x800.jpg'
-import CardsProfile from "@/components/Cards/CardsProfile";
+
+import { toast } from "sonner"
 
 const Register = () => {
     const { store } = useContext(storeContext);
@@ -21,18 +21,14 @@ const Register = () => {
 
         const checkUser = users.some(item => item.username == `${firstname.split(' ')[0].toLowerCase()}_${lastname.toLowerCase()}`)
         if (checkUser) {
-            handleNotify({
-                title: 'Warning',
-                messages: 'User Already exists',
-                status: 'warn',
+            toast.error("Error Alert", {
+                description: "There seems to be an issue with you credentials",
             })
             return
         }
         if (password !== confirmpassword) {
-            handleNotify({
-                title: 'Warning',
-                messages: 'Password mismatch',
-                status: 'warn',
+            toast.error("Error Alert", {
+                description: "There seems to be an issue with you credentials",
             })
             return
         }
@@ -61,7 +57,15 @@ const Register = () => {
         }
         nurses.push(nurseDetails)
         users.push(loginDetails)
-       
+                    toast.success("Please Log in", {
+                        description: `${nurseDetails.firstName} ${nurseDetails.lastName}`,
+                    })
+                toast.success("Registered Successfully", {
+                    description: `${new Date()}`,
+                })
+                
+                const url =  "/auth/login"
+                navigate(url);
 
     }
 

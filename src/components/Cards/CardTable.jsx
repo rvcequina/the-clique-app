@@ -1,5 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { addDays, format } from "date-fns"
+import { CalendarIcon } from "lucide-react"
 
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Calendar } from "@/components/ui/calendar"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 
 
 const CardTable = ({
@@ -8,20 +19,24 @@ const CardTable = ({
     data = [],
     color,
     searchbar = false,
-    daterange =false,
+    daterange = false,
 
 }) => {
-    const [searchResults, setSearchResults] = useState(data)
-    const handleDateSearch = (formData)=>{
-        const start = formData.get("datestart");
-        const end = formData.get("dateend");
-        console.log(start,end)
-    }
-    const handleSearch = ()=>{
+    const [searchResults, setSearchResults] = useState()
+    const [date, setDate] = useState({
 
-    }
+    })
+    const handleDateSearch = () => {
+        const start = date.from;
+        const end = date.to;
 
- 
+        console.log(start, end)
+    }
+    useEffect(() => {
+        setSearchResults(data)
+    }, [data])
+
+
     return (
         <>
             <div
@@ -64,30 +79,45 @@ const CardTable = ({
                         {
                             daterange ?
                                 <>
-                                    <form action={handleDateSearch} className="flex flex-row  items-center lg:ml-auto mr-3">
-                                        <div className="relative flex w-full flex-wrap items-stretch gap-3">
-                                            
-                                            <span className="flex w-[40%] items-center gap-2">
-                                                From
-                                            <input
-                                                type="date"
-                                                name="datestart"
-                                                
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring"
-                                            />
-                                            </span>
-                                            -
-                                            <span className="flex w-[40%] items-center gap-2">
-                                                Until
-                                                <input
-                                                type="date"
-                                                name="dateend"
-                                                placeholder=""
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring "
-                                            />
-                                            </span>
-                                           <button type="submit" className="bg-white text-amber-700">Search</button>
-                                        </div>
+                                    <form className={cn("grid gap-2 text-gray-500 md:flex")}>
+                                        <Popover>
+                                            <PopoverTrigger asChild>
+                                                <Button
+                                                    id="date"
+                                                    variant={"outline"}
+                                                    className={cn(
+                                                        "w-[300px] justify-center text-left font-normal  bg-white",
+                                                        !date && "text-muted-foreground"
+                                                    )}
+                                                >
+                                                    <CalendarIcon />
+                                                    {date?.from ? (
+                                                        date.to ? (
+                                                            <>
+                                                                {format(date.from, "LLL dd, y")} -{" "}
+                                                                {format(date.to, "LLL dd, y")}
+                                                            </>
+                                                        ) : (
+                                                            format(date.from, "LLL dd, y")
+                                                        )
+                                                    ) : (
+                                                        <span>Pick a date</span>
+                                                    )}
+                                                </Button>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-auto p-0" align="start">
+                                                <Calendar
+                                                    initialFocus
+                                                    mode="range"
+                                                    defaultMonth={date?.from}
+                                                    selected={date}
+                                                    onSelect={setDate}
+                                                    numberOfMonths={2}
+
+                                                />
+                                            </PopoverContent>
+                                        </Popover>
+                                        <Button type="submit" onClick={() => handleDateSearch()} className={'bg-white text-gray-500'}>search</Button>
                                     </form>
                                 </>
                                 : ''
@@ -103,8 +133,9 @@ const CardTable = ({
                         <thead>
                             <tr>
                                 {
-                                    headers.map(name => {
+                                    headers.map((name, idx) => {
                                         return (<th
+                                            key={idx}
                                             className={
                                                 "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                                                 (color === "light"
@@ -122,20 +153,26 @@ const CardTable = ({
                         </thead>
                         <tbody>
                             {
-                                searchResults?.map((item) => {
+                                searchResults?.map((item, idx) => {
                                     return (
-                                        Object.entries(item).map(([key, value]) => {
-                                            return (
-                                                <tr key={key}>
+                                        <tr key={idx}>
+                                            {
 
-                                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                        {value}
-                                                    </td>
+                                                Object.entries(item).map(([key, value]) => {
+                                                    return (
 
-                                                </tr>
-                                            )
 
-                                        })
+                                                        <td key={key} className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                            {value}
+                                                        </td>
+
+
+                                                    )
+
+                                                })
+
+                                            }
+                                        </tr>
                                     )
                                 })
                             }

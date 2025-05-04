@@ -121,6 +121,20 @@ export const STORE_CONTEXT = {
       updatedAt: "2025-03-15",
 
     },
+    {
+      historyId: 3,
+      patientId: 1,
+      medicationId: "1391",
+      symptomsId: "6789",
+      diagnosisId:"4567",
+      treatmentId:"8765",
+      visitedDate: "2025-04-15",
+      resultId:"1000",
+      doctorId: 1,
+      createdAt: "2025-04-15",
+      updatedAt: "2025-04-15",
+
+    },
     //pnuemonia
     {
       historyId: 2,
@@ -144,8 +158,6 @@ export const STORE_CONTEXT = {
       name: "Oseltamivir",
       dosage: "75mg",
       frequency: "Twice a day",
-      startDate: "2025-04-10",
-      endDate: "2025-04-15",
       prescribedFor: ["Influenza"],
       prescribedByDoctorId: 3,
       createdAt: "2025-04-10",
@@ -156,8 +168,6 @@ export const STORE_CONTEXT = {
       name: "Sumatriptan",
       dosage: "50mg",
       frequency: "As needed",
-      startDate: "2025-04-12",
-      endDate: "2025-04-17",
       prescribedFor: ["Migraine"],
       prescribedByDoctorId: 4,
       createdAt: "2025-04-12",
@@ -168,8 +178,6 @@ export const STORE_CONTEXT = {
       name: "Amoxicillin",
       dosage: "500mg",
       frequency: "Three times a day",
-      startDate: "2025-04-08",
-      endDate: "2025-04-14",
       prescribedFor: ["Pneumonia"],
       prescribedByDoctorId: 5,
       createdAt: "2025-04-08",
