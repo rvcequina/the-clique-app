@@ -1,10 +1,17 @@
-import React, { useState, useContext } from "react";
-import { NavLink } from "react-router";
+import React, { useState, useContext,useEffect } from "react";
+import { NavLink, useNavigate } from "react-router";
 import Logo from '@/assets/img/logo.svg'
 import { storeContext } from "@/providers/store/context";
 const Navbar = ({ isAuth }) => {
     const [navbarOpen, setNavbarOpen] = useState(false);
     const { currentUser } = useContext(storeContext);
+    const navigate = useNavigate();
+
+    const handleGoBack = (event) => {
+        event.preventDefault();
+        navigate(-1); // Go back one step
+    };
+
     return (
         <nav className="top-0 absolute z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
             <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
@@ -85,7 +92,7 @@ const Navbar = ({ isAuth }) => {
                                             </li> : <li className="flex items-center">
                                                 <NavLink
                                                     className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                                                    to="/"
+                                                    to="/" 
                                                 >
                                                     Go Back
                                                 </NavLink >
@@ -104,7 +111,7 @@ const Navbar = ({ isAuth }) => {
                                     : <li className="flex items-center">
                                         <NavLink
                                             className="text-white text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                                            to="dashboard"
+                                            to="#" onClick={handleGoBack}
                                         >
                                             Dashboard
                                         </NavLink >
@@ -146,7 +153,7 @@ const Navbar = ({ isAuth }) => {
                                                     </li>
                                                 </a >
                                             </>
-                                            :''
+                                            : ''
                                     }
                                     {!currentUser ? <>
                                         <hr />
@@ -163,7 +170,7 @@ const Navbar = ({ isAuth }) => {
                                             :
                                             <NavLink
                                                 className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
-                                                to="/"
+                                                to="/" 
                                             >
                                                 <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
                                                     Go back
@@ -179,7 +186,7 @@ const Navbar = ({ isAuth }) => {
                                         </NavLink > */}
                                     </> : <NavLink
                                         className="w-full flex justify-center items-center p-4 text-indigo-900 text-sm hover:text-white hover:bg-sky-700"
-                                        to="dashboard"
+                                        to="#" onClick={handleGoBack}
                                     >
                                         <li className=" font-bold leading-relaxed  whitespace-nowrap uppercase">
                                             Dashboard

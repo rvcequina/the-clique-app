@@ -1,76 +1,171 @@
-import React, { useState } from "react";
-
-import asset1 from '../../assets/img/team-1-800x800.jpg'
+import React, { useState, useContext, useMemo, useEffect } from "react";
+import { NavLink, useNavigate } from "react-router";
+import { toast } from "sonner"
+import { storeContext } from "@/providers/store/context";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const UserDropdown = () => {
     // dropdown props
+    const { userLogout, getCurrentUser } = useContext(storeContext);
     const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
+    const [user, setUser] = useState('')
+
+    let navigate = useNavigate();
+
+
+
     const handleShow = () => {
+
         setDropdownPopoverShow(!dropdownPopoverShow)
     }
+
+    useMemo(() => {
+        // Component did mount logic here
+        console.log('Component mounted');
+        setUser(getCurrentUser())
+        // Cleanup function to run when the component is destroyed
+        
+    }, [getCurrentUser]);
+
+
+    const handleLogout = async () => {
+
+        toast.info("INFO", {
+            description: `${user?.firstName} ${user?.lastName} you have been successfully logged off.`,
+        })
+        userLogout()
+        navigate('/')
+    }
+
+
     return (
         <>
-            <div className="relative">
-                <a
+            <div className="relative cursor-pointer">
+                <NavLink
                     className="text-blueGray-500 block"
-                    href="#pablo"
                     onClick={handleShow}
                 >
                     <div className="items-center flex">
-                        <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
-                            <img
+                        <Avatar className={'w-[3rem] h-[3rem] shadow-md'}>
+                            <AvatarImage src="https://github.com/shadcn.png" />
+                            <AvatarFallback>{user?.firstName?.split("")[0]} {user?.lastName?.split("")[0]}</AvatarFallback>
+                        </Avatar>
+                        {/* <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
+
+                            <div
+
+                                className="h-12 w-12 bg-gray-500 text-white flex text-lg    justify-center items-center rounded-full border"
                                 alt="..."
-                                className="w-full rounded-full align-middle border-none shadow-lg"
-                                src={asset1}
-                            />
-                        </span>
+                            ></div>
+                        </span> */}
                     </div>
-                </a>
+                </NavLink>
                 {
                     dropdownPopoverShow ?
                         <div
 
                             className={
-                                "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48 absolute top-15 right-0"
+                                " bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48 absolute top-15 right-0"
                             }
                         >
-                            <a
-                                href="#pablo"
+                            {
+                                user?.userType == 1 ?
+                                    <>
+                                        <NavLink
+                                        
+                                            className={
+                                                "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
+                                            }
+                                           to="admin/"
+                                           replace
+                                        >
+                                            Analytics
+                                        </NavLink>
+                                        <NavLink
+                                        
+                                            className={
+                                                "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
+                                            }
+                                           to="admin/patient-list/  "
+                                           replace
+                                        >
+                                            Patient Data
+                                        </NavLink>
+                                        <NavLink
+                                        
+                                            className={
+                                                "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
+                                            }
+                                           to="admin/"
+                                           replace
+                                        >
+                                            Profile
+                                        </NavLink>
+                                    </>
+                                    :
+                                    <>
+                                        <NavLink
+                                        
+                                            className={
+                                                "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
+                                            }
+                                           to="/dashboard/patient/"
+                                           replace
+                                        >
+                                            Profile
+                                        </NavLink>
+                                        <NavLink
+                                        
+                                            className={
+                                                "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
+                                            }
+                                           to="/dashboard/patient/medications"
+                                           
+                                        >
+                                            Medications
+                                        </NavLink>
+                                        <NavLink
+                                        
+                                            className={
+                                                "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
+                                            }
+                                           to="/dashboard/patient/results/"
+                                           replace
+                                        >
+                                            Laboratory Results
+                                        </NavLink>
+                                        <NavLink
+                                        
+                                            className={
+                                                "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
+                                            }
+                                           to="/dashboard/patient/recommendations/"
+                                           replace
+                                        >
+                                            Doctor's Recommendations
+                                        </NavLink>
+                                    </>
+                            }
+                            <NavLink
+                            
                                 className={
-                                    "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+                                    "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                 }
-                                onClick={(e) => e.preventDefault()}
+                               to="admin/"
+                                           replace
                             >
-                                Action
-                            </a>
-                            <a
-                                href="#pablo"
-                                className={
-                                    "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-                                }
-                                onClick={(e) => e.preventDefault()}
-                            >
-                                Another action
-                            </a>
-                            <a
-                                href="#pablo"
-                                className={
-                                    "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-                                }
-                                onClick={(e) => e.preventDefault()}
-                            >
-                                Something else here
-                            </a>
+                                Settings
+                            </NavLink>
                             <div className="h-0 my-2 border border-solid border-blueGray-100" />
-                            <a
-                                href="#pablo"
+                            <div
+                                onClick={() => handleLogout()}
                                 className={
-                                    "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+                                    "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                 }
-                                onClick={(e) => e.preventDefault()}
+
                             >
-                                Seprated link
-                            </a>
+                                Log out
+                            </div>
                         </div>
                         : ''
                 }

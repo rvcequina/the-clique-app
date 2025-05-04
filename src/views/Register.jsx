@@ -19,8 +19,8 @@ const Register = () => {
         const confirmpassword = formData.get("confirmpassword").trim();
         const contactnumber = formData.get("contactnumber");
 
-        const checkPass = users.some(item => item.password == password)
-        if (checkPass) {
+        const checkUser = users.some(item => item.username == `${firstname.split(' ')[0].toLowerCase()}_${lastname.toLowerCase()}`)
+        if (checkUser) {
             handleNotify({
                 title: 'Warning',
                 messages: 'User Already exists',

@@ -1,17 +1,22 @@
 /*eslint-disable*/
-import React, { useEffect, useContext, useState } from "react"
+import React, { useEffect, useContext, useState, useMemo } from "react"
 import { NavLink } from "react-router"
-
+import { useLocation } from "react-router"
+import Logo from '@/assets/img/logo.svg'
 
 import UserDropdown from "@/components/Dropdowns/UserDropdown"
-import { storeContext } from "@/providers/store/context"
-const Sidebar = () => {
+
+const Sidebar = ({ user }) => {
   const [collapseShow, setCollapseShow] = React.useState("hidden")
-  const { currentUser } = useContext(storeContext)
+
   const [isAdmin, setIsAdmin] = useState(true)
-  useEffect(() => {
-    setIsAdmin(currentUser.userType == 1 ? true : false)
-  }, [currentUser])
+  const location = useLocation()
+  useMemo(() => {
+    if (user) {
+      setIsAdmin(user.userType == 1 ? true : false)
+    }
+
+  }, [user])
 
   return (
     <>
@@ -26,12 +31,30 @@ const Sidebar = () => {
             <i className="fas fa-bars"></i>
           </button>
           {/* Brand */}
-          <NavLink
+          {/* <NavLink
             className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             to="/"
           >
             The Clique
-          </NavLink>
+          </NavLink> */}
+          <div className="flex items-center gap-4 mr-4">
+            <NavLink
+
+              to="/"
+            >
+              <img
+                alt="..."
+                src={Logo}
+                className="w-10"
+              />
+            </NavLink >
+            <NavLink
+              className=" text-sm font-bold leading-relaxed inline-block  py-2 whitespace-nowrap uppercase border-0 outline-none"
+              to="/"
+            >
+              <div className="text-cyan-500"> The Clique</div>
+            </NavLink >
+          </div>
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
             <li className="inline-block relative">
@@ -52,12 +75,30 @@ const Sidebar = () => {
             <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
-                  <NavLink
+                  {/* <NavLink
                     className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     to="/"
                   >
                     The Clique
-                  </NavLink>
+                  </NavLink> */}
+                  <div className="flex items-center flex-col mr-4">
+                    <NavLink
+
+                      to="/"
+                    >
+                      <img
+                        alt="..."
+                        src={Logo}
+                        className="w-10"
+                      />
+                    </NavLink >
+                    <NavLink
+                      className=" text-sm font-bold leading-relaxed inline-block  py-2 whitespace-nowrap uppercase border-0 outline-none"
+                      to="/"
+                    >
+                      <div className="text-cyan-500"> The Clique</div>
+                    </NavLink >
+                  </div>
                 </div>
                 <div className="w-6/12 flex justify-end">
                   <button
@@ -66,20 +107,13 @@ const Sidebar = () => {
                     onClick={() => setCollapseShow("hidden")}
                   >
                     <i className="fas fa-times"></i>
+
                   </button>
                 </div>
               </div>
             </div>
-            {/* Form */}
-            <form className="mt-6 mb-4 md:hidden">
-              <div className="mb-3 pt-0">
-                <input
-                  type="text"
-                  placeholder="Search"
-                  className="border-0 px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
-                />
-              </div>
-            </form>
+            <div className="h-0 my-2 border border-solid border-blueGray-100" />
+
 
 
             {isAdmin ?
@@ -97,16 +131,18 @@ const Sidebar = () => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/dashboard") !== -1
+                        (location.pathname == "/dashboard/admin/"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/dashboard"
+                      to="admin/"
+                      replace
+
                     >
                       <i
                         className={
                           "fas fa-tv mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/dashboard") !== -1
+                          (location.pathname == "/dashboard/admin/"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -119,16 +155,16 @@ const Sidebar = () => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/patients") !== -1
+                        (location.pathname == "/dashboard/admin/patient-list/"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/patients"
+                      to="admin/patient-list/"
                     >
                       <i
                         className={
                           "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/patients") !== -1
+                          (location.pathname == "/dashboard/admin/patient-list/"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -156,16 +192,17 @@ const Sidebar = () => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/settings") !== -1
+                        (location.pathname == "/dashboard/patient/"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/settings"
+                      to="/dashboard/patient/"
+                      replace
                     >
                       <i
                         className={
-                          "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/settings") !== -1
+                          "fas fa-user mr-2 text-sm " +
+                          (location.pathname == "/dashboard/patient/"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -178,16 +215,16 @@ const Sidebar = () => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/settings") !== -1
+                        (location.pathname == "/dashboard/patient/medications"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/settings"
+                      to="/dashboard/patient/medications"
                     >
                       <i
                         className={
-                          "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/settings") !== -1
+                          "fas fa-medkit mr-2 text-sm " +
+                          (location.pathname == "/dashboard/patient/medications"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -200,16 +237,16 @@ const Sidebar = () => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/settings") !== -1
+                        (location.pathname == "/dashboard/patient/results"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/settings"
+                      to="/dashboard/patient/results"
                     >
                       <i
                         className={
                           "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/settings") !== -1
+                          (location.pathname == "/dashboard/patient/results"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -221,16 +258,16 @@ const Sidebar = () => {
                     <NavLink
                       className={
                         "text-xs uppercase py-3 font-bold block " +
-                        (window.location.href.indexOf("/admin/settings") !== -1
+                        (location.pathname == "/dashboard/patient/recommendations"
                           ? "text-lightBlue-500 hover:text-lightBlue-600"
                           : "text-blueGray-700 hover:text-blueGray-500")
                       }
-                      to="/admin/settings"
+                      to="/dashboard/patient/recommendations"
                     >
                       <i
                         className={
-                          "fas fa-tools mr-2 text-sm " +
-                          (window.location.href.indexOf("/admin/settings") !== -1
+                          "fas fa-user-md mr-2 text-sm " +
+                          (location.pathname == "/dashboard/patient/recommendations"
                             ? "opacity-75"
                             : "text-blueGray-300")
                         }
@@ -247,6 +284,7 @@ const Sidebar = () => {
 
           </div>
         </div>
+
       </nav>
     </>
   );
