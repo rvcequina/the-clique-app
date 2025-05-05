@@ -35,7 +35,7 @@ const HeaderStats = ({ user }) => {
   }
 
   const getPatientStats = ()=>{
-    console.log()
+ 
     patientStats.encounter =getHistoryById(getCurrentUser().patientId).length
     patientStats.results = getHistoryById(getCurrentUser().patientId).filter(item=>item.resultId !='').length
     patientStats.diagnosis = getHistoryById(getCurrentUser().patientId).filter(item=>item.diagnosisId !='').length
