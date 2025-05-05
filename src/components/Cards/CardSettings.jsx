@@ -1,16 +1,28 @@
 import React from "react";
-
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetFooter,
+  SheetClose
+} from "@/components/ui/sheet"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 // components
 
-export default function CardSettings() {
+const CardSettings=({ children })=> {
   return (
     <>
-      <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+      {/* <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
             <h6 className="text-blueGray-700 text-xl font-bold">My account</h6>
             <button
-              className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+              className="bg-sky-500 text-white active:bg-sky-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
               type="button"
             >
               Settings
@@ -178,7 +190,53 @@ export default function CardSettings() {
             </div>
           </form>
         </div>
-      </div>
+      </div> */}
+      <Sheet>
+        <SheetTrigger asChild>
+          {children}
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>Edit profile</SheetTitle>
+            <SheetDescription>
+              Make changes to your profile here. Click save when you're done.
+            </SheetDescription>
+          </SheetHeader>
+          <div className="grid gap-4 p-4">
+            <div className="flex w-full max-w-sm items-center gap-2">
+              <Label className={'w-[6rem]'} htmlFor="address">Address</Label>
+              <Input type="text" id="address" />
+            </div>
+            <div className="flex w-full max-w-sm items-center gap-1.5">
+              <Label className={'w-[6rem]'} htmlFor="email">Email</Label>
+              <Input type="email" id="email" />
+            </div>
+            <div className="flex w-full max-w-sm items-center gap-1.5">
+              <Label className={'w-[6rem]'} htmlFor="tel">Contact</Label>
+              <Input
+                type="text"
+                id="tel"
+                name="contactnumber"
+
+                pattern="[0-9]{4}[0-9]{7}"
+              />
+            </div>
+          </div>
+          <SheetFooter>
+            <SheetClose asChild>
+              <Button variant="ghost" type="submit">
+                <div className=" px-4 py-2 rounded flex items-center gap-2 text-white bg-sky-600 hover:bg-sky-400 shadow-lg shadow-cyan-500/100">
+                  <i className="fas fa-save " />
+                  <div > Save Changes</div>
+                </div>
+              </Button>
+             
+            </SheetClose>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </>
   );
 }
+
+export default CardSettings

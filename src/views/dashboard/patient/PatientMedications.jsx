@@ -1,17 +1,17 @@
 import { useEffect, useContext, useState } from 'react'
 import { storeContext } from '@/providers/store/context';
 import CardTable from "@/components/Cards/CardTable";
-const Medicatons = () => {
-    const { currentUser, getPatientMedicationByid, getCurrentUser } = useContext(storeContext)
+const PatientMedications = () => {
+    const { currentUser, getPatientMedicationById, getCurrentUser } = useContext(storeContext)
     const [data, setData] = useState()
     useEffect( () => {
 
         
         const newVal = async()=> {
              const x =  currentUser ?
-            await getPatientMedicationByid(currentUser.patientId)
+            await getPatientMedicationById(currentUser.patientId)
             :
-            await getPatientMedicationByid(getCurrentUser().patientId)
+            await getPatientMedicationById(getCurrentUser().patientId)
             setData(x)
             
         }
@@ -27,4 +27,4 @@ const Medicatons = () => {
         </div>
     )
 }
-export default Medicatons;
+export default PatientMedications;

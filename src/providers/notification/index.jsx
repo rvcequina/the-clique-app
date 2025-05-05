@@ -4,6 +4,7 @@ import { notifyContext, NOTIFY_CONTEXT } from "@/providers/notification/context"
 import Notification from "@/components/Alerts/Notification";
 import Toaster  from "@/components/Alerts/Toaster"
 
+
 const NotificationProvider = ({ children }) => {
     const [notification, setNotification] = useState(NOTIFY_CONTEXT);
     const [notify, setNotify] = useState(false)

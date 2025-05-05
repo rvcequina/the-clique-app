@@ -41,7 +41,7 @@ const Register = () => {
             loginId: users.length + 1,
             nurseId: nurses.length + 1,
             userType: 1,
-            username: `${lastname.toLowerCase()}_${firstname.split(' ')[0].toLowerCase()}`,
+            username: `${firstname.toLowerCase()}_${lastname.split(' ')[0].toLowerCase()}`,
             password: password,
             lastLogin: `${formattedDate}`
         }

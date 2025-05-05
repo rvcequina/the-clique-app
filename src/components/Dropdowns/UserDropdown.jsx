@@ -41,9 +41,9 @@ const UserDropdown = () => {
     return (
         <>
             <div className="relative cursor-pointer">
-                <NavLink
+                <div
                     className="text-blueGray-500 block"
-                    onClick={handleShow}
+                    onClick={()=>handleShow()}
                 >
                     <div className="items-center flex">
                         <Avatar className={'w-[3rem] h-[3rem] shadow-md'}>
@@ -59,7 +59,7 @@ const UserDropdown = () => {
                             ></div>
                         </span> */}
                     </div>
-                </NavLink>
+                </div>
                 {
                     dropdownPopoverShow ?
                         <div
@@ -78,6 +78,7 @@ const UserDropdown = () => {
                                             }
                                            to="admin/"
                                            replace
+                                           onClick={()=>handleShow()}
                                         >
                                             Analytics
                                         </NavLink>
@@ -86,8 +87,9 @@ const UserDropdown = () => {
                                             className={
                                                 "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                             }
-                                           to="admin/patient-list/  "
+                                           to="admin/patient-list/"
                                            replace
+                                           onClick={()=>handleShow()}
                                         >
                                             Patient Data
                                         </NavLink>
@@ -111,6 +113,7 @@ const UserDropdown = () => {
                                             }
                                            to="/dashboard/patient/"
                                            replace
+                                           onClick={()=>handleShow()}
                                         >
                                             Profile
                                         </NavLink>
@@ -120,7 +123,7 @@ const UserDropdown = () => {
                                                 "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                             }
                                            to="/dashboard/patient/medications"
-                                           
+                                           onClick={()=>handleShow()}
                                         >
                                             Medications
                                         </NavLink>
@@ -131,6 +134,7 @@ const UserDropdown = () => {
                                             }
                                            to="/dashboard/patient/results/"
                                            replace
+                                           onClick={()=>handleShow()}
                                         >
                                             Laboratory Results
                                         </NavLink>
@@ -141,6 +145,7 @@ const UserDropdown = () => {
                                             }
                                            to="/dashboard/patient/recommendations/"
                                            replace
+                                           onClick={()=>handleShow()}
                                         >
                                             Doctor's Recommendations
                                         </NavLink>
@@ -152,7 +157,8 @@ const UserDropdown = () => {
                                     "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                 }
                                to="admin/"
-                                           replace
+                               replace
+                               onClick={()=>handleShow()}
                             >
                                 Settings
                             </NavLink>

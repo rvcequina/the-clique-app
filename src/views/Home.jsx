@@ -272,7 +272,7 @@ const Home = () => {
                                                 <i className="fab fa-twitter"></i>
                                             </button>
                                             <button
-                                                className="bg-lightBlue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                                                className="bg-sky-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
                                                 type="button"
                                             >
                                                 <i className="fab fa-facebook-f"></i>
@@ -307,7 +307,7 @@ const Home = () => {
                                                 <i className="fab fa-google"></i>
                                             </button>
                                             <button
-                                                className="bg-lightBlue-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                                                className="bg-sky-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
                                                 type="button"
                                             >
                                                 <i className="fab fa-facebook-f"></i>

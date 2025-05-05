@@ -18,7 +18,7 @@ const Login = () => {
         const password = formData.get("password");
 
         const checkUser = users.some(item => item.username == username)
-
+        console.log(users)
         if (!checkUser) {
             toast.error("Error Alert", {
                 description: "There seems to be an issue with you credentials",

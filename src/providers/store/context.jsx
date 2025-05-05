@@ -10,6 +10,7 @@ export const STORE_CONTEXT = {
       gender: "Male",
       contactNumber: "1234567890",
       address: "123 Elm Street",
+      email:"john@doe.com",
       stationId: 1,
       doctorId: 1,
       isAdmitted: true,
@@ -24,6 +25,7 @@ export const STORE_CONTEXT = {
       gender: "Female",
       contactNumber: "0987654321",
       address: "456 Oak Avenue",
+      email:"Jane@smith.com",
       stationId: 2,
       doctorId: 2,
       isAdmitted: false,
@@ -38,6 +40,7 @@ export const STORE_CONTEXT = {
       gender: "Female",
       contactNumber: "0987654321",
       address: "456 Oak Avenue",
+      email:"morris@baker.com",
       stationId: 2,
       doctorId: 2,
       isAdmitted: true,
@@ -130,6 +133,20 @@ export const STORE_CONTEXT = {
       treatmentId:"8765",
       visitedDate: "2025-04-15",
       resultId:"1000",
+      doctorId: 1,
+      createdAt: "2025-04-15",
+      updatedAt: "2025-04-15",
+
+    },
+    {
+      historyId: 4,
+      patientId: 1,
+      medicationId: "",
+      symptomsId: "6789",
+      diagnosisId:"",
+      treatmentId:"",
+      visitedDate: "2025-05-15",
+      resultId:"",
       doctorId: 1,
       createdAt: "2025-04-15",
       updatedAt: "2025-04-15",
@@ -335,6 +352,15 @@ export const STORE_CONTEXT = {
       createdAt: "2025-03-16",
       updatedAt: "2025-03-16",
     },
+    {
+      resultId: "1002",
+      patientId: 2,
+      procedureId: "1123",
+      result: "Bone fractures",
+      testDate: "2025-03-16",
+      createdAt: "2025-03-16",
+      updatedAt: "2025-03-16",
+    },
     // Add more lab results here...
   ],
   users: [
@@ -379,40 +405,7 @@ export const STORE_CONTEXT = {
       lastLogin: "2025-03-28"
     },
   ],
-  // patientLogin: [
-  //   {
-  //     loginId: 1,
-  //     patientId: 1,
-  //     username: "john_doe",
-  //     password: "secure123",
-  //     lastLogin: "2025-03-27"
-  //   },
-  //   {
-  //     loginId: 2,
-  //     patientId: 2,
-  //     username: "jane_smith",
-  //     password: "secure456",
-  //     lastLogin: "2025-03-28"
-  //   },
-  //   // Add more patient login records here...
-  // ],
-  // nurseLogin: [
-  //   {
-  //     loginId: 1,
-  //     nurseId: 1,
-  //     username: "swift_taylor",
-  //     password: "nurse123",
-  //     lastLogin: "2025-03-27"
-  //   },
-  //   {
-  //     loginId: 2,
-  //     nurseId: 2,
-  //     username: "michael_brown",
-  //     password: "nurse456",
-  //     lastLogin: "2025-03-28"
-  //   },
-  //   // Add more nurse login records here...
-  // ],
+
 };
 
 export const storeContext = createContext(STORE_CONTEXT);
