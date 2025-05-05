@@ -4,9 +4,9 @@ import React, { useContext, useEffect, useState } from "react";
 import CardStats from "@/components/Cards/CardStats";
 import { storeContext } from "@/providers/store/context";
 
-const HeaderStats = ({ user }) => {
+const HeaderStats = () => {
 
-  const { getTotalNurses, getTotalPatients, getTotalAdmitted, getHistoryById, store, currentUser, getCurrentUser } = useContext(storeContext);
+  const { getTotalNurses, getTotalPatients, getTotalAdmitted, getHistoryById, currentUser, getCurrentUser } = useContext(storeContext);
   const [total, setTotal] = useState({
     nurses: 0,
     patients: 0,
@@ -18,14 +18,20 @@ const HeaderStats = ({ user }) => {
     encounter: 0,
     results: 0,
     diagnosis: 0,
-    lastvisit:''
+    lastvisit: ''
   })
+  const [user, setUser] = useState()
 
   useEffect(() => {
 
+    const getUser = currentUser ? currentUser : getCurrentUser()
+    setUser(getUser)
+    if (getUser.userType == 2) {
+      getPatientStats()
+    }
     getTotal()
-    getPatientStats()
-  }, [store])
+
+  }, [])
 
   const getTotal = () => {
 
@@ -36,11 +42,11 @@ const HeaderStats = ({ user }) => {
   }
 
   const getPatientStats = () => {
-    const user = currentUser ? currentUser : getCurrentUser()
-    patientStats.encounter = getHistoryById(user.patientId).length
-    patientStats.results = getHistoryById(user.patientId).filter(item => item.resultId != '').length
-    patientStats.diagnosis = getHistoryById(user.patientId).filter(item => item.diagnosisId != '').length
-    patientStats.lastvisit =getHistoryById(user.patientId)[getHistoryById(user.patientId).length-1].visitedDate
+    const getUser = currentUser ? currentUser : getCurrentUser()
+    patientStats.encounter = getHistoryById(getUser.patientId).length
+    patientStats.results = getHistoryById(getUser.patientId).filter(item => item.resultId != '').length
+    patientStats.diagnosis = getHistoryById(getUser.patientId).filter(item => item.diagnosisId != '').length
+    patientStats.lastvisit = getHistoryById(getUser.patientId)[getHistoryById(getUser.patientId).length - 1].visitedDate
   }
 
   return (

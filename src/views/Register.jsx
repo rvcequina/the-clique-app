@@ -36,7 +36,6 @@ const Register = () => {
         const now = new Date();
         const formattedDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
 
-
         const loginDetails = {
             loginId: users.length + 1,
             nurseId: nurses.length + 1,

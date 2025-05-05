@@ -1,142 +1,107 @@
-import React, { useEffect, useRef } from "react";
-import Chart from "chart.js/auto";
+import { TrendingUp } from "lucide-react"
+import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
 
-const CardBarChart = () => {
-    const chartRef = useRef(null); // Reference for the canvas element
-    const chartInstance = useRef(null); // Reference for the Chart.js instance
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart"
+const chartData = [
+  { month: "January", active: 186, discharged: 80 },
+  { month: "February", active: 305, discharged: 200 },
+  { month: "March", active: 237, discharged: 120 },
+  { month: "April", active: 73, discharged: 190 },
+  { month: "May", active: 209, discharged: 130 },
+  { month: "June", active: 214, discharged: 140 },
+]
 
-    useEffect(() => {
-        let config = {
-            type: "bar",
-            data: {
-                labels: [
-                    "January",
-                    "February",
-                    "March",
-                    "April",
-                    "May",
-                    "June",
-                    "July",
-                ],
-                datasets: [
-                    {
-                        label: new Date().getFullYear(),
-                        backgroundColor: "#ed64a6",
-                        borderColor: "#ed64a6",
-                        data: [30, 78, 56, 34, 100, 45, 13],
-                        fill: false,
-                        barThickness: 8,
-                    },
-                    {
-                        label: new Date().getFullYear() - 1,
-                        fill: false,
-                        backgroundColor: "#4c51bf",
-                        borderColor: "#4c51bf",
-                        data: [27, 68, 86, 74, 10, 4, 87],
-                        barThickness: 8,
-                    },
-                ],
-            },
-            options: {
-                maintainAspectRatio: false,
-                responsive: true,
-                title: {
-                    display: false,
-                    text: "Orders Chart",
-                },
-                tooltips: {
-                    mode: "index",
-                    intersect: false,
-                },
-                hover: {
-                    mode: "nearest",
-                    intersect: true,
-                },
-                legend: {
-                    labels: {
-                        fontColor: "rgba(0,0,0,.4)",
-                    },
-                    align: "end",
-                    position: "bottom",
-                },
-                scales: {
-                    x: [
-                        {
-                            display: false,
-                            scaleLabel: {
-                                display: true,
-                                labelString: "Month",
-                            },
-                            gridLines: {
-                                borderDash: [2],
-                                borderDashOffset: [2],
-                                color: "rgba(33, 37, 41, 0.3)",
-                                zeroLineColor: "rgba(33, 37, 41, 0.3)",
-                                zeroLineBorderDash: [2],
-                                zeroLineBorderDashOffset: [2],
-                            },
-                        },
-                    ],
-                    y: [
-                        {
-                            display: true,
-                            scaleLabel: {
-                                display: false,
-                                labelString: "Value",
-                            },
-                            gridLines: {
-                                borderDash: [2],
-                                drawBorder: false,
-                                borderDashOffset: [2],
-                                color: "rgba(33, 37, 41, 0.2)",
-                                zeroLineColor: "rgba(33, 37, 41, 0.15)",
-                                zeroLineBorderDash: [2],
-                                zeroLineBorderDashOffset: [2],
-                            },
-                        },
-                    ],
-                },
-            },
-        };
-        // Check if a chart instance already exists and destroy it
-        if (chartInstance.current) {
-            chartInstance.current.destroy();
-        }
-      
-        // Create the new chart
-        chartInstance.current = new Chart(chartRef.current, config);
-    
+const chartConfig = {
+  active: {
+    label: "active",
+    color: "hsl(var(--chart-1))",
+  },
+  discharged: {
+    label: "discharged",
+    color: "hsl(var(--chart-2))",
+  },
+} 
 
-        // Cleanup function to destroy the chart instance on unmount
-        // return () => {
-        //   if (chartInstance.current) {
-        //     chartInstance.current.destroy();
-        //   }
-        // };
-    }, []);
-    return (
-        <>
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-                <div className="rounded-t mb-0 px-4 py-3 bg-transparent">
-                    <div className="flex flex-wrap items-center">
-                        <div className="relative w-full max-w-full flex-grow flex-1">
-                            <h6 className="uppercase text-blueGray-400 mb-1 text-xs font-semibold">
-                                Performance
-                            </h6>
-                            <h2 className="text-blueGray-700 text-xl font-semibold">
-                                Total orders
-                            </h2>
-                        </div>
-                    </div>
-                </div>
-                <div className="p-4 flex-auto">
-                    {/* Chart */}
-                    <div className="relative h-350-px">
-                    <canvas ref={chartRef} id="bar-chart"></canvas>;
-                    </div>
-                </div>
+const  CardBarChart=() =>{
+  return (
+    <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+         <Card >
+      <CardHeader>
+        <CardTitle>Performance Indicator</CardTitle>
+        <CardDescription>
+          Showing total visitors for the last 6 months
+        </CardDescription>
+      </CardHeader>
+      <CardContent >
+        <ChartContainer config={chartConfig}>
+          <AreaChart
+            accessibilityLayer
+            data={chartData}
+            margin={{
+              left: 12,
+              right: 12,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              dataKey="month"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tickFormatter={(value) => value.slice(0, 3)}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="dot" />}
+            />
+            <Area
+              dataKey="discharged"
+              type="natural"
+              fill="var(--color-discharged)"
+              fillOpacity={0.4}
+              stroke="var(--color-discharged)"
+              stackId="a"
+            />
+            <Area
+              dataKey="active"
+              type="natural"
+              fill="var(--color-active)"
+              fillOpacity={0.4}
+              stroke="var(--color-active)"
+              stackId="a"
+            />
+          </AreaChart>
+        </ChartContainer>
+      </CardContent>
+      <CardFooter>
+        <div className="flex w-full items-start gap-2 text-sm">
+          <div className="grid gap-2">
+            <div className="flex items-center gap-2 font-medium leading-none">
+              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
             </div>
-        </>
-    );
+            <div className="flex items-center gap-2 leading-none text-muted-foreground">
+              January - May 2025
+            </div>
+          </div>
+        </div>
+      </CardFooter>
+    </Card>
+    </div>
+   
+  )
 }
+
 export default CardBarChart
