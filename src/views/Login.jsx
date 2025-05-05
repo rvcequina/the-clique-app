@@ -18,7 +18,7 @@ const Login = () => {
         const password = formData.get("password");
 
         const checkUser = users.some(item => item.username == username)
-        console.log(users)
+        
         if (!checkUser) {
             toast.error("Error Alert", {
                 description: "There seems to be an issue with you credentials",
@@ -33,11 +33,11 @@ const Login = () => {
             })
             return
         }
-        const userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId, userData.userType)
+        const userDetails = userData.userType == 1 ? await getNurseById(userData.nurseId) : await getPatientById(userData.patientId)
         setCurrentUser(userDetails)
         localStorage.setItem("user", JSON.stringify(userDetails))
  
-
+       
         toast.success("Login Successful", {
             description: "Sunday, December 03, 2023 at 9:00 AM",
         })
