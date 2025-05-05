@@ -13,7 +13,7 @@ const Analytics=()=> {
     <>
       <div className="flex flex-wrap">
         
-        <div className="w-full  px-4 z-10 rounded ">
+        <div className="w-full  px-4  rounded ">
           <CardBarChart />
         </div>
       </div>

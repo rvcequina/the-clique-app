@@ -167,7 +167,7 @@ const UserDropdown = () => {
                             <div
                                 onClick={() => handleLogout()}
                                 className={
-                                    "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
+                                    "cursor-pointer  py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                 }
 
                             >
