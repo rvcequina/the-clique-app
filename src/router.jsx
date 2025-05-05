@@ -12,6 +12,7 @@ import NotFound from "@/views/NotFound";
 import PatientProfile from "@/views/dashboard/patient/patientProfile";
 import PatientMedications from "@/views/dashboard/patient/PatientMedications";
 import PatientResults from "@/views/dashboard/patient/patientResults";
+import DoctorsReco from "@/views/dashboard/patient/doctorsReco";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
                             { index: true, Component: PatientProfile },
                             { path: "medications", Component: PatientMedications },
                             { path: "results", Component: PatientResults },
-                            { path: "recommendations", Component: PatientList },
+                            { path: "recommendations", Component: DoctorsReco },
                         ],
                     },
                 ],
