@@ -8,8 +8,36 @@ import missionpic from "@/assets/img/mission.jpg";
 import visionpic from "@/assets/img/vission.jpg";
 import Navbar from '@/components/Navbars/Navbar';
 import Footer from '@/components/Footers/Footer';
+import Dialog from '@/components/Alerts/Dialog';
+import { useState } from 'react';
+
+
 
 const Home = () => {
+    const [isDisabled, setIsDisabled] = useState(true)
+    const [fullName, setFullName] = useState('')
+    const [email, setEmail] = useState('')
+    const [message, setMessage] = useState('')
+
+
+    const handleChange = (val, target) => {
+        if (target == 'name') {
+            setFullName(val)
+        }
+        if (target == 'email') {
+            setEmail(val)
+        }
+        if (target == 'message') {
+            setMessage(val)
+        }
+        if(fullName && email&&message){
+            setIsDisabled(false)
+        }
+        else{
+            setIsDisabled(true)
+        }
+
+    }
 
     return (
         <>
@@ -220,7 +248,7 @@ const Home = () => {
                                         cooperation, evidence-based material, and responsible use of
                                         digital technology.
                                     </p>
-                              
+
                                 </div>
                             </div>
                         </div>
@@ -425,7 +453,7 @@ const Home = () => {
                                 </h2>
                                 <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-400">
                                     We value your thoughts and ideas as they help us grow and improve.
-                                     Whether you have suggestions, questions, or insights, your feedback matters to us.
+                                    Whether you have suggestions, questions, or insights, your feedback matters to us.
                                 </p>
                             </div>
                         </div>
@@ -435,10 +463,10 @@ const Home = () => {
                                     <i className="fas fa-medal text-xl"></i>
                                 </div>
                                 <h6 className="text-xl mt-5 font-semibold text-white">
-                                Your Insights
+                                    Your Insights
                                 </h6>
                                 <p className="mt-2 mb-4 text-blueGray-400">
-                                Share your experience and let us know how we can improve.
+                                    Share your experience and let us know how we can improve.
                                 </p>
                             </div>
                             <div className="w-full lg:w-3/12 px-4 text-center">
@@ -446,10 +474,10 @@ const Home = () => {
                                     <i className="fas fa-poll text-xl"></i>
                                 </div>
                                 <h5 className="text-xl mt-5 font-semibold text-white">
-                                Innovative Feedback
+                                    Innovative Feedback
                                 </h5>
                                 <p className="mt-2 mb-4 text-blueGray-400">
-                                Help us innovate and make a positive impact through your insights.
+                                    Help us innovate and make a positive impact through your insights.
                                 </p>
                             </div>
                             <div className="w-full lg:w-3/12 px-4 text-center">
@@ -457,10 +485,10 @@ const Home = () => {
                                     <i className="fas fa-lightbulb text-xl"></i>
                                 </div>
                                 <h5 className="text-xl mt-5 font-semibold text-white">
-                                Growth Together
+                                    Growth Together
                                 </h5>
                                 <p className="mt-2 mb-4 text-blueGray-400">
-                                Your suggestions drive meaningful change and growth.
+                                    Your suggestions drive meaningful change and growth.
                                 </p>
                             </div>
                         </div>
@@ -472,61 +500,75 @@ const Home = () => {
                             <div className="w-full lg:w-6/12 px-4">
                                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200">
                                     <div className="flex-auto p-5 lg:p-10">
-                                      
+
                                         <p className="leading-relaxed mt-1 mb-4 text-blueGray-500">
                                             Complete this form and we will get back to you in 24
                                             hours.
                                         </p>
-                                        <div className="relative w-full mb-3 ">
-                                            <label
-                                                className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                                htmlFor="full-name"
-                                            >
-                                                Full Name
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                placeholder="Full Name"
-                                            />
-                                        </div>
+                                        <form action="">
+                                            <div className="relative w-full mb-3 ">
+                                                <label
+                                                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                    htmlFor="full-name"
+                                                >
+                                                    Full Name
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    value={fullName}
+                                                    onChange={e => handleChange(e.target.value, 'name')}
+                                                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                    placeholder="Full Name"
+                                                    required
+                                                />
+                                            </div>
 
-                                        <div className="relative w-full mb-3">
-                                            <label
-                                                className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                                htmlFor="email"
-                                            >
-                                                Email
-                                            </label>
-                                            <input
-                                                type="email"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                placeholder="Email"
-                                            />
-                                        </div>
+                                            <div className="relative w-full mb-3">
+                                                <label
+                                                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                    htmlFor="email"
+                                                >
+                                                    Email
+                                                </label>
+                                                <input
+                                                    type="email"
+                                                    value={email}
+                                                    onChange={e => handleChange(e.target.value, 'email')}
+                                                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                    placeholder="Email"
 
-                                        <div className="relative w-full mb-3">
-                                            <label
-                                                className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                                htmlFor="message"
-                                            >
-                                                Message
-                                            </label>
-                                            <textarea
-                                                rows="4"
-                                                cols="80"
-                                                className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                                                placeholder="Type a message..."
-                                            />
-                                        </div>
-                                        <div className="text-center mt-6">
-                                            <button
-                                                className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                type="button"
-                                            >
-                                                Send Message
-                                            </button>
-                                        </div>
+                                                />
+                                            </div>
+
+                                            <div className="relative w-full mb-3">
+                                                <label
+                                                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                    htmlFor="message"
+                                                >
+                                                    Message
+                                                </label>
+                                                <textarea
+                                                    value={message}
+                                                    onChange={e => handleChange(e.target.value, 'message')}
+                                                    rows="4"
+                                                    cols="80"
+                                                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                                                    placeholder="Type a message..."
+                                                />
+                                            </div>
+                                            <div className="text-center mt-6">
+                                                <Dialog title="Message Sent" message={'Thank you, We will get back at you as soon as possible'}>
+                                                    <button
+                                                        disabled={isDisabled}
+                                                        className={`${isDisabled ? 'bg-gray-400' : 'bg-sky-600 active:bg-blue-600 hover:shadow-lg'} text-white  text-sm font-bold uppercase px-6 py-3 rounded shadow  outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`}
+
+                                                    >
+                                                        Send Message
+                                                    </button>
+                                                </Dialog>
+
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

@@ -24,7 +24,7 @@ const UserDropdown = () => {
         console.log('Component mounted');
         setUser(getCurrentUser())
         // Cleanup function to run when the component is destroyed
-        
+
     }, [getCurrentUser]);
 
 
@@ -43,7 +43,7 @@ const UserDropdown = () => {
             <div className="relative cursor-pointer">
                 <div
                     className="text-blueGray-500 block"
-                    onClick={()=>handleShow()}
+                    onClick={() => handleShow()}
                 >
                     <div className="items-center flex">
                         <Avatar className={'w-[3rem] h-[3rem] shadow-md'}>
@@ -72,96 +72,97 @@ const UserDropdown = () => {
                                 user?.userType == 1 ?
                                     <>
                                         <NavLink
-                                        
+
                                             className={
                                                 "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                             }
-                                           to="admin/"
-                                           replace
-                                           onClick={()=>handleShow()}
+                                            to="admin/"
+                                            replace
+                                            onClick={() => handleShow()}
                                         >
                                             Analytics
                                         </NavLink>
                                         <NavLink
-                                        
+
                                             className={
                                                 "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                             }
-                                           to="admin/patient-list/"
-                                           replace
-                                           onClick={()=>handleShow()}
+                                            to="admin/patient-list/"
+                                            replace
+                                            onClick={() => handleShow()}
                                         >
                                             Patient Data
                                         </NavLink>
                                         <NavLink
-                                        
+
                                             className={
                                                 "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                             }
-                                           to="admin/"
-                                           replace
+                                            to="admin/"
+                                            replace
                                         >
                                             Profile
+                                        </NavLink>
+                                        <NavLink
+
+                                            className={
+                                                "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
+                                            }
+                                            to="admin/"
+                                            replace
+                                            onClick={() => handleShow()}
+                                        >
+                                            Settings
                                         </NavLink>
                                     </>
                                     :
                                     <>
                                         <NavLink
-                                        
+
                                             className={
                                                 "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                             }
-                                           to="/dashboard/patient/"
-                                           replace
-                                           onClick={()=>handleShow()}
+                                            to="/dashboard/patient/"
+                                            replace
+                                            onClick={() => handleShow()}
                                         >
                                             Profile
                                         </NavLink>
                                         <NavLink
-                                        
+
                                             className={
                                                 "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                             }
-                                           to="/dashboard/patient/medications"
-                                           onClick={()=>handleShow()}
+                                            to="/dashboard/patient/medications"
+                                            onClick={() => handleShow()}
                                         >
                                             Medications
                                         </NavLink>
                                         <NavLink
-                                        
+
                                             className={
                                                 "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                             }
-                                           to="/dashboard/patient/results/"
-                                           replace
-                                           onClick={()=>handleShow()}
+                                            to="/dashboard/patient/results/"
+                                            replace
+                                            onClick={() => handleShow()}
                                         >
                                             Laboratory Results
                                         </NavLink>
                                         <NavLink
-                                        
+
                                             className={
                                                 "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
                                             }
-                                           to="/dashboard/patient/recommendations/"
-                                           replace
-                                           onClick={()=>handleShow()}
+                                            to="/dashboard/patient/recommendations/"
+                                            replace
+                                            onClick={() => handleShow()}
                                         >
                                             Doctor's Recommendations
                                         </NavLink>
                                     </>
                             }
-                            <NavLink
-                            
-                                className={
-                                    "cursor-pointer py-2 px-4 text-sm font-normal block w-full whitespace-nowrap text-gray-600 hover:text-white hover:bg-blue-500"
-                                }
-                               to="admin/"
-                               replace
-                               onClick={()=>handleShow()}
-                            >
-                                Settings
-                            </NavLink>
+
                             <div className="h-0 my-2 border border-solid border-blueGray-100" />
                             <div
                                 onClick={() => handleLogout()}

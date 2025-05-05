@@ -32,7 +32,7 @@ const CardsProfile = ({ user }) => {
                                 <div className="w-1/2 flex justify-end">
                                     <CardSettings>
                                         <Button variant="ghost">
-                                            <div className=" px-4 py-2 rounded flex items-center text-white bg-sky-600 hover:bg-sky-400 shadow-lg shadow-cyan-500/100">
+                                            <div className="px-4 py-2 rounded flex items-center text-white bg-sky-600 hover:bg-sky-400 shadow-lg shadow-cyan-500/100">
                                                 <i className="fas fa-edit " />
                                                 <div > Edit</div>
                                             </div>
