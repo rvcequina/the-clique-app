@@ -32,7 +32,7 @@ const Dashboard = () => {
       <div className="relative md:ml-64 bg-blueGray-100 ">
         <AdminNavbar />
         {/* Header */}
-        <HeaderStats />
+        <HeaderStats user={currentUser} />
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
         {/* <div className="px-4 md:px-10 mx-auto w-full min-h-[90vh] "> */}
           <Outlet />

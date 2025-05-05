@@ -7,10 +7,12 @@ import Login from "@/views/Login";
 import Register from "@/views/Register";
 import Dashboard from "@/layouts/Dashboard";
 import Analytics from "@/views/dashboard/admin/analytics";
-import PatientList from "./views/dashboard/admin/patienList";
+import PatientList from "@/views/dashboard/admin/patienList";
 import NotFound from "@/views/NotFound";
-import PatientProfile from "./views/dashboard/patient/patientProfile";
-import Medicatons from "./views/dashboard/patient/medications";
+import PatientProfile from "@/views/dashboard/patient/patientProfile";
+import PatientMedications from "@/views/dashboard/patient/PatientMedications";
+import PatientResults from "@/views/dashboard/patient/patientResults";
+import DoctorsReco from "@/views/dashboard/patient/doctorsReco";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -42,9 +44,9 @@ const router = createBrowserRouter([
 
                         children: [
                             { index: true, Component: PatientProfile },
-                            { path: "medications", Component: Medicatons },
-                            { path: "results", Component: PatientList },
-                            { path: "recommendations", Component: PatientList },
+                            { path: "medications", Component: PatientMedications },
+                            { path: "results", Component: PatientResults },
+                            { path: "recommendations", Component: DoctorsReco },
                         ],
                     },
                 ],

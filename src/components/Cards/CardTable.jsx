@@ -128,57 +128,75 @@ const CardTable = ({
 
                 <div className="block w-full overflow-x-auto">
                     {/* Projects table */}
-
-                    <table className="items-center w-full bg-transparent border-collapse">
-                        <thead>
-                            <tr>
-                                {
-                                    headers.map((name, idx) => {
-                                        return (<th
-                                            key={idx}
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                    ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                    : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                                            }
-                                        >
-                                            {name}
-                                        </th>)
-                                    })
-                                }
-
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                searchResults?.map((item, idx) => {
-                                    return (
-                                        <tr key={idx}>
+                    {
+                        searchResults?.length > 0 ?
+                            <>
+                                <table className="items-center w-full bg-transparent border-collapse">
+                                    <thead>
+                                        <tr>
                                             {
-
-                                                Object.entries(item).map(([key, value]) => {
-                                                    return (
-
-
-                                                        <td key={key} className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            {value}
-                                                        </td>
-
-
-                                                    )
-
+                                                headers.map((name, idx) => {
+                                                    return (<th
+                                                        key={idx}
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                                : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                                        }
+                                                    >
+                                                        {name}
+                                                    </th>)
                                                 })
-
                                             }
-                                        </tr>
-                                    )
-                                })
-                            }
 
-                        </tbody>
-                    </table>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        {
+                                            searchResults.map((item, idx) => {
+                                                return (
+                                                    <tr key={idx}>
+                                                        {
+
+                                                            Object.entries(item).map(([key, value]) => {
+                                                                return (
+
+
+                                                                    <td key={key} className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                                        {value}
+                                                                    </td>
+
+
+                                                                )
+
+                                                            })
+
+                                                        }
+                                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                            <div className="flex gap-4 items-center cursor-pointer w-max p-2 px-4 hover:bg-white hover:text-lightBlue-600">
+                                                                <i className="fas fa-eye"></i>
+                                                                View
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })
+                                        }
+
+
+
+                                    </tbody>
+                                </table>
+                            </>
+                            :
+                            <>
+                                <h2 className="w-full h-[20vh] text-xl capitalize flex justify-center items-center bg-transparent">
+                                    no current data</h2>
+                            </>
+                    }
                 </div>
             </div>
         </>

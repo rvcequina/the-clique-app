@@ -213,11 +213,11 @@ export default function CardPatients({ color }) {
                     </td>
                     <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                       {/* <TableDropdown /> */}
-                      <div className="flex gap-4">   
-                       <div className="cursor-pointer hover:text-lightBlue-600 "><i className="fas fa-eye"></i></div>
-                        <div className="cursor-pointer hover:text-lightBlue-600 "> <i className="fas fa-edit"></i></div>
+                      <div className="flex gap-4 items-center cursor-pointer w-max p-2 px-4 hover:bg-white hover:text-lightBlue-600">
+                        <i className="fas fa-eye"></i>
+                        View
                       </div>
-                    
+
                     </td>
                   </tr>)
                 })

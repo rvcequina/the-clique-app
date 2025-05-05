@@ -107,10 +107,10 @@ const StoreProvider = ({ children }) => {
         return docotrDetails
     }
 
-    const getPatientMedicationByid = async (id) => {
+    const getPatientMedicationById = async (id) => {
 
 
-        const patientHstory = await store.patientHistory.filter(item => item.patientId == id)
+        const patientHistory = await store.patientHistory.filter(item => item.patientId == id)
         let medications
         let medicationHistory = []
         let patientHistoryDetails = {
@@ -120,9 +120,12 @@ const StoreProvider = ({ children }) => {
             frequency: '',
             visitedDate: ''
         }
-        patientHstory.map( data => {
-          
-            medications =  store.medications.find(item => item.medicationId == data.medicationId)
+        patientHistory.map(data => {
+
+            medications = store.medications.find(item => item.medicationId == data.medicationId)
+            if(!data.medicationId){
+                return
+            }
             patientHistoryDetails = {
                 id: data.medicationId,
                 name: medications.name,
@@ -131,11 +134,52 @@ const StoreProvider = ({ children }) => {
                 visitedDate: data.visitedDate
             }
             medicationHistory.push(patientHistoryDetails)
-           
+
         })
-       
+
         return medicationHistory
 
+    }
+
+    const getPatientResultById = async (id) => {
+
+
+        const patientResults = await store.labResults.filter(item => item.patientId == id)
+        let laboratory
+        let laboratoryProcedures = []
+
+        let patientResultDetails = {
+            id: '',
+            name: '',
+            description: '',
+            result: '',
+            testDate: '',
+
+        }
+        patientResults.map(data => {
+
+            laboratory = store.laboratoryProcedures.find(item => item.procedureId == data.procedureId)
+            if(!data.resultId){
+                return
+            }
+            patientResultDetails = {
+                id: data.procedureId,
+                name: laboratory.name,
+                description: laboratory.description,
+                result: data.result,
+                testDate: data.testDate,
+            }
+            laboratoryProcedures.push(patientResultDetails)
+        })
+        return laboratoryProcedures
+    }  
+
+    const getHistoryById = (id)=>{
+        const patientHistory =  store.patientHistory.filter(item => item.patientId == id)
+        return patientHistory
+         // patientStats.encounter
+    // patientStats.results
+    // patientStats.diagnosis
     }
 
     const userLogout = () => {
@@ -160,7 +204,9 @@ const StoreProvider = ({ children }) => {
                 getCurrentUser,
                 getNurseById,
                 getPatientById,
-                getPatientMedicationByid,
+                getPatientMedicationById,
+                getPatientResultById,
+                getHistoryById,
                 userLogout
             }}
         >
