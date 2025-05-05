@@ -117,11 +117,11 @@ export const STORE_CONTEXT = {
       symptomsId: "6789",
       diagnosisId:"4567",
       treatmentId:"8765",
-      visitedDate: "2025-03-15",
+      visitedDate: "2024-03-15",
       resultId:"1000",
       doctorId: 1,
-      createdAt: "2025-03-15",
-      updatedAt: "2025-03-15",
+      createdAt: "2024-03-15",
+      updatedAt: "2024-03-15",
 
     },
     {
@@ -131,11 +131,11 @@ export const STORE_CONTEXT = {
       symptomsId: "6789",
       diagnosisId:"4567",
       treatmentId:"8765",
-      visitedDate: "2025-04-15",
+      visitedDate: "2024-04-15",
       resultId:"1000",
       doctorId: 1,
-      createdAt: "2025-04-15",
-      updatedAt: "2025-04-15",
+      createdAt: "2024-04-15",
+      updatedAt: "2024-04-15",
 
     },
     {
@@ -145,11 +145,11 @@ export const STORE_CONTEXT = {
       symptomsId: "6789",
       diagnosisId:"",
       treatmentId:"",
-      visitedDate: "2025-05-15",
+      visitedDate: "2024-05-15",
       resultId:"",
       doctorId: 1,
-      createdAt: "2025-04-15",
-      updatedAt: "2025-04-15",
+      createdAt: "2024-04-15",
+      updatedAt: "2024-04-15",
 
     },
     //pnuemonia

@@ -12,7 +12,7 @@ const Dashboard = () => {
   let navigate = useNavigate();
   useEffect(()=>{
     checkUser()
-  })
+  },[])
 
   const checkUser = ()=>{
     const getUser = localStorage.getItem('user');
