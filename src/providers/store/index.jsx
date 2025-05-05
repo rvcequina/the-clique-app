@@ -65,7 +65,7 @@ const StoreProvider = ({ children }) => {
         const patientInfo = await store.patients.find(item => item.patientId == id)
         const stationDetails = await getStationById(patientInfo.stationId)
         const doctorDetails = await getDoctorById(patientInfo.doctorId)
-        
+
         if (!userInfo && !patientInfo) {
             return
         }
@@ -77,6 +77,7 @@ const StoreProvider = ({ children }) => {
             patientId: id,
             firstName: patientInfo.firstName ? patientInfo.firstName : '',
             lastName: patientInfo.lastName ? patientInfo.lastName : '',
+            email:patientInfo.email?patientInfo.email:'',
             dob: patientInfo.dob ? patientInfo.dob : '',
             gender: patientInfo.gender ? patientInfo.gender : '',
             contactNumber: patientInfo.contactNumber ? patientInfo.contactNumber : '',
