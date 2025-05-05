@@ -23,7 +23,7 @@ const PatientResults = () => {
     }, [])
     return (
         <div className="min-h-[60vh]">
-            <CardTable title={'Medication History'} headers={['Id', 'Laboratory Procedure', 'description', 'result', 'Test Date','Actions']} data={data} daterange />
+            <CardTable title={'Laboratory Results'} headers={['Id', 'Laboratory Procedure', 'description', 'result', 'Test Date','Actions']} data={data} daterange />
         </div>
     )
 }

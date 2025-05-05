@@ -5,8 +5,8 @@ import CardStats from "@/components/Cards/CardStats";
 import { storeContext } from "@/providers/store/context";
 
 const HeaderStats = ({ user }) => {
-    
-  const { getTotalNurses, getTotalPatients, getTotalAdmitted,getHistoryById, store, getCurrentUser } = useContext(storeContext);
+
+  const { getTotalNurses, getTotalPatients, getTotalAdmitted, getHistoryById, store, currentUser, getCurrentUser } = useContext(storeContext);
   const [total, setTotal] = useState({
     nurses: 0,
     patients: 0,
@@ -14,16 +14,17 @@ const HeaderStats = ({ user }) => {
     stats: '49,65%'
   })
 
-  const [patientStats,setPatientStats] = useState({
-      encounter:0,
-      results:0,
-      diagnosis:0
-
+  const [patientStats, setPatientStats] = useState({
+    encounter: 0,
+    results: 0,
+    diagnosis: 0,
+    lastvisit:''
   })
 
   useEffect(() => {
-    user?.userType==1?
-    getTotal() : getPatientStats()
+
+    getTotal()
+    getPatientStats()
   }, [store])
 
   const getTotal = () => {
@@ -34,11 +35,12 @@ const HeaderStats = ({ user }) => {
 
   }
 
-  const getPatientStats = ()=>{
- 
-    patientStats.encounter =getHistoryById(getCurrentUser().patientId).length
-    patientStats.results = getHistoryById(getCurrentUser().patientId).filter(item=>item.resultId !='').length
-    patientStats.diagnosis = getHistoryById(getCurrentUser().patientId).filter(item=>item.diagnosisId !='').length
+  const getPatientStats = () => {
+    const user = currentUser ? currentUser : getCurrentUser()
+    patientStats.encounter = getHistoryById(user.patientId).length
+    patientStats.results = getHistoryById(user.patientId).filter(item => item.resultId != '').length
+    patientStats.diagnosis = getHistoryById(user.patientId).filter(item => item.diagnosisId != '').length
+    patientStats.lastvisit =getHistoryById(user.patientId)[getHistoryById(user.patientId).length-1].visitedDate
   }
 
   return (
@@ -133,13 +135,13 @@ const HeaderStats = ({ user }) => {
                     </div>
                     <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                       <CardStats
-                        statSubtitle="Satisfaction Rate"
-                        statTitle={total.stats}
+                        statSubtitle="Date of Last Visit"
+                        statTitle={patientStats.lastvisit}
                         statArrow="up"
                         statPercent="12"
                         statPercentColor="text-emerald-500"
                         statDescripiron="Since last month"
-                        statIconName="fas fa-percent"
+                        statIconName="fas fa-calendar"
                         statIconColor="bg-lightBlue-500"
                       />
                     </div>
