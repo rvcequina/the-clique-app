@@ -1,12 +1,38 @@
-# React + Vite
+# The Clique
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a project prototype made by nursing students to simulate a nursing information system.
 
-Currently, two official plugins are available:
+![Clique](https://github.com/rvcequina/the-clique-app/blob/master/src/assets/clique_page.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+>this is intended for personal use and not meant for commercial and production purposes.
 
-## Expanding the ESLint configuration
+### Techstack 
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `React Js`
+- `Vite`
+- `Tailwind`
+- `Shadcn`
+
+### Template - Notus React by Creative Tim
+
+This project was created using a free version of  [notus-react](https://www.creative-tim.com/product/notus-react) from the Creative Tim website.
+
+View [Notus React Documentation](https://www.creative-tim.com/product/nothttps://www.creative-tim.com/learning-lab/tailwind/react/overview/notus)
+
+## How to get started
+
+* `clone the repo from git@github.com:rvcequina/the-clique-app.git`
+* `run npm install && npm run dev`
+
+***
+
+#### Optional: 
+```
+Do this section if you have an issue during npm install. 
+This is more likely a dependency issue between react 19 
+and Shadcn at the time that this project was made
+```
+
+* `npm install --legacy-peer-deps`
+
+

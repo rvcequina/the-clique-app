@@ -13,6 +13,7 @@ import PatientProfile from "@/views/dashboard/patient/patientProfile";
 import PatientMedications from "@/views/dashboard/patient/PatientMedications";
 import PatientResults from "@/views/dashboard/patient/patientResults";
 import DoctorsReco from "@/views/dashboard/patient/doctorsReco";
+import ViewPatient from "@/views/dashboard/admin/viewPatient";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -36,7 +37,8 @@ const router = createBrowserRouter([
 
                         children: [
                             { index: true, Component: Analytics },
-                            { path: "patient-list", Component: PatientList }
+                            { path: "patient-list", Component: PatientList },
+                            { path: "patient/:pid", Component: ViewPatient },
                         ],
                     },
                     {

@@ -1,33 +1,29 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-
-import asset1 from '../../assets/img/team-1-800x800.jpg'
-import asset2 from '../../assets/img/team-2-800x800.jpg'
-import asset3 from '../../assets/img/team-3-800x800.jpg'
-import asset4 from '../../assets/img/team-4-470x470.png'
+import { useNavigate } from "react-router";
+import ViewPatient from "@/views/dashboard/admin/viewPatient";
 // components
 import { storeContext } from "@/providers/store/context";
 import useSearchPatient from '@/hooks/useSearchPatient';
-import { useMatches } from "react-router";
-// import TableDropdown from "components/Dropdowns/TableDropdown.js";
+
 
 export default function CardPatients({ color }) {
-  const { store, getPatientById } = useContext(storeContext)
+  const { store, getPatientById, getPatientMedicationById, getPatientResultById } = useContext(storeContext)
   const [patientList, setPatientList] = useState([])
   const { searchResults, searchInArray } = useSearchPatient();
-
-
-
-
+  const navigate = useNavigate();
+  const state = {
+    patient: [],
+    medications: [],
+    results: [],
+    recommendations: []
+  };
 
   const handleSearch = (formData) => {
     const query = formData.get("query");
-
     searchInArray(patientList, query);
-
-
   }
 
-  useMemo(() => {
+  useEffect(() => {
 
     store.patients.map(async item => {
       const currentPatient = await getPatientById(item.patientId);
@@ -51,10 +47,20 @@ export default function CardPatients({ color }) {
     }
   }, [patientList])
 
+  const handleView = async (id) => {
+    state.patient = await getPatientById(id)
+    state.medications = await getPatientMedicationById(id)
+    state.results = await getPatientResultById(id)
+    state.recommendations = []
+
+
+    navigate(`/dashboard/admin/patient/${id}`, { state: state, replace: true });
+  }
 
 
   return (
     <>
+
       <div
         className={
           "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
@@ -62,8 +68,8 @@ export default function CardPatients({ color }) {
         }
       >
         <div className="rounded-t mb-0 px-4 py-3 border-0">
-          <div className="flex flex-wrap items-center">
-            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+          <div className="flex flex-wrap items-center ">
+            <div className="relative  px-4 max-w-full flex items-center gap-2">
               <h3
                 className={
                   "font-semibold text-lg " +
@@ -72,6 +78,10 @@ export default function CardPatients({ color }) {
               >
                 Patient List
               </h3>
+              <div className="w-12 h-6 gap-2 cursor-pointer hover:text-sky-100  hover:bg-sky-600 text-sky-300 bg-sky-800 rounded-full flex justify-center items-center p-2">
+                <i class="fa fa-user-plus" aria-hidden="true" />
+                {/* <div className="text-sm capitalize">add user</div> */}
+                </div>
             </div>
             <form action={handleSearch} className="flex flex-row flex-wrap items-center lg:ml-auto mr-3">
               <div className="relative flex w-full flex-wrap items-stretch">
@@ -87,6 +97,7 @@ export default function CardPatients({ color }) {
               </div>
             </form>
           </div>
+
         </div>
 
         <div className="block w-full overflow-x-auto">
@@ -211,7 +222,7 @@ export default function CardPatients({ color }) {
 
                       </div>
                     </td>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                    <td onClick={() => handleView(item.patientId)} className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                       {/* <TableDropdown /> */}
                       <div className="flex gap-4 items-center cursor-pointer w-max p-2 px-4 hover:bg-white hover:text-lightBlue-600">
                         <i className="fas fa-eye"></i>
@@ -228,6 +239,7 @@ export default function CardPatients({ color }) {
           </table>
         </div>
       </div>
+
     </>
   );
 }
