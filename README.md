@@ -1,7 +1,7 @@
 # The Clique
 
 This is a project prototype made by nursing student to simulate a nursing information system.
-https://github.com/rvcequina/the-clique-app/blob/master/src/assets/react.svg
+
 ![Clique]('https://github.com/rvcequina/the-clique-app/blob/master/src/assets/clique_page.png')
 
 this is intended for personal use and not meant for commercial and production purposes.
