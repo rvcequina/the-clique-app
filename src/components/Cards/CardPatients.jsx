@@ -1,33 +1,29 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-
-import asset1 from '../../assets/img/team-1-800x800.jpg'
-import asset2 from '../../assets/img/team-2-800x800.jpg'
-import asset3 from '../../assets/img/team-3-800x800.jpg'
-import asset4 from '../../assets/img/team-4-470x470.png'
+import { useNavigate } from "react-router";
+import ViewPatient from "@/views/dashboard/admin/viewPatient";
 // components
 import { storeContext } from "@/providers/store/context";
 import useSearchPatient from '@/hooks/useSearchPatient';
-import { useMatches } from "react-router";
-// import TableDropdown from "components/Dropdowns/TableDropdown.js";
+
 
 export default function CardPatients({ color }) {
   const { store, getPatientById } = useContext(storeContext)
   const [patientList, setPatientList] = useState([])
   const { searchResults, searchInArray } = useSearchPatient();
-
-
-
-
+  const navigate = useNavigate();
+  const state = {
+    data: {
+      name: 'john',
+      age: 35
+    }
+  };
 
   const handleSearch = (formData) => {
     const query = formData.get("query");
-
     searchInArray(patientList, query);
-
-
   }
 
-  useMemo(() => {
+  useEffect(() => {
 
     store.patients.map(async item => {
       const currentPatient = await getPatientById(item.patientId);
@@ -51,6 +47,9 @@ export default function CardPatients({ color }) {
     }
   }, [patientList])
 
+  const handleView = (id) => {
+    navigate(`/dashboard/admin/patient/${id}`, { state: state ,replace:true});
+  }
 
 
   return (
@@ -211,7 +210,7 @@ export default function CardPatients({ color }) {
 
                       </div>
                     </td>
-                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
+                    <td onClick={() => handleView(item.patientId)} className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
                       {/* <TableDropdown /> */}
                       <div className="flex gap-4 items-center cursor-pointer w-max p-2 px-4 hover:bg-white hover:text-lightBlue-600">
                         <i className="fas fa-eye"></i>
@@ -228,6 +227,7 @@ export default function CardPatients({ color }) {
           </table>
         </div>
       </div>
+
     </>
   );
 }
