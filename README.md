@@ -1,25 +1,23 @@
 # The Clique
 
-This is a project prototype made by nursing student to simulate a nursing information system.
+This is a project prototype made by nursing students to simulate a nursing information system.
 
-![Clique]('https://github.com/rvcequina/the-clique-app/blob/master/src/assets/clique_page.png')
+![Clique](src\assets\clique_page.png)
 
-this is intended for personal use and not meant for commercial and production purposes.
+>this is intended for personal use and not meant for commercial and production purposes.
 
-### TechStack Used
+### Techstack 
 
 - `React Js`
 - `Vite`
 - `Tailwind`
 - `Shadcn`
 
-### Template
+### Template - Notus React by Creative Tim
 
-This project was made from the template from Creative Tim Website
-[https://www.creative-tim.com/](https://www.creative-tim.com/product/notus-react)
+This project was created using a free version of  [notus-react](https://www.creative-tim.com/product/notus-react) from the Creative Tim website.
 
-View Documentation
-[https://www.creative-tim.com/](https://www.creative-tim.com/product/nothttps://www.creative-tim.com/learning-lab/tailwind/react/overview/notus)
+View [Notus React Documentation](https://www.creative-tim.com/product/nothttps://www.creative-tim.com/learning-lab/tailwind/react/overview/notus)
 
 ## How to get started
 
