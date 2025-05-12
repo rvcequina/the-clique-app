@@ -33,16 +33,16 @@ const ViewPatient = () => {
         <>
           <div className="flex min-h-[60vh]">
 
-            <div className="w-full bg-white flex flex-col  p-4 z-20 ">
-              <div className="flex justify-end">
+            <div className="w-full bg-white flex flex-col  p-4 z-20 relative">
+              <div className="flex justify-end absolute -top-5 -right-3 z-40">
                 <button onClick={() =>  navigate(`/dashboard/admin/patient-list/`)}>
-                  <div className="w-8 h-8  hover:text-white hover:bg-sky-300 text-sky-600 bg-white rounded-full flex justify-center items-center">
+                  <div className="w-8 h-8  hover:text-white hover:bg-sky-300 text-sky-100 bg-sky-900 rounded-full shadow-lg flex justify-center items-center">
                     <i class="fa fa-times" aria-hidden="true"></i>
                   </div>
                 </button>
               </div>
               <Tabs defaultValue="profile" className={'w-full'}>
-                <TabsList className="flex">
+                <TabsList className="flex flex-col md:flex-row">
                   <TabsTrigger value="profile">Profile</TabsTrigger>
                   <TabsTrigger value="medication">Medication</TabsTrigger>
                   <TabsTrigger value="results">Results</TabsTrigger>
@@ -56,7 +56,7 @@ const ViewPatient = () => {
                         View/Make changes on client's profile
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-2">
+                    <CardContent className="space-y-2 ">
                       <CardsProfile user={patient} />
 
                     </CardContent>
@@ -73,7 +73,7 @@ const ViewPatient = () => {
                         Here you could view/add medications
                       </CardDescription>
                     </CardHeader>
-                    <CardContent className="space-y-2">
+                    <CardContent className="space-y-2 sm:px-0">
                       <CardTable title={'Medication History'} headers={['Id', 'Medication name', 'dosage', 'frequency', 'visited Date', 'Actions']} data={medications} daterange />
                     </CardContent>
                     <CardFooter>
