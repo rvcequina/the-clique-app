@@ -2,7 +2,7 @@
 
 This is a project prototype made by nursing students to simulate a nursing information system.
 
-![Clique](src\assets\clique_page.png)
+![Clique](https://github.com/rvcequina/the-clique-app/blob/master/src/assets/clique_page.png)
 
 >this is intended for personal use and not meant for commercial and production purposes.
 
