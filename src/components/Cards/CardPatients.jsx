@@ -7,15 +7,15 @@ import useSearchPatient from '@/hooks/useSearchPatient';
 
 
 export default function CardPatients({ color }) {
-  const { store, getPatientById } = useContext(storeContext)
+  const { store, getPatientById, getPatientMedicationById, getPatientResultById } = useContext(storeContext)
   const [patientList, setPatientList] = useState([])
   const { searchResults, searchInArray } = useSearchPatient();
   const navigate = useNavigate();
   const state = {
-    data: {
-      name: 'john',
-      age: 35
-    }
+    patient: [],
+    medications: [],
+    results: [],
+    recommendations: []
   };
 
   const handleSearch = (formData) => {
@@ -47,13 +47,20 @@ export default function CardPatients({ color }) {
     }
   }, [patientList])
 
-  const handleView = (id) => {
-    navigate(`/dashboard/admin/patient/${id}`, { state: state ,replace:true});
+  const handleView = async (id) => {
+    state.patient = await getPatientById(id)
+    state.medications = await getPatientMedicationById(id)
+    state.results = await getPatientResultById(id)
+    state.recommendations = []
+
+
+    navigate(`/dashboard/admin/patient/${id}`, { state: state, replace: true });
   }
 
 
   return (
     <>
+
       <div
         className={
           "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
@@ -61,8 +68,8 @@ export default function CardPatients({ color }) {
         }
       >
         <div className="rounded-t mb-0 px-4 py-3 border-0">
-          <div className="flex flex-wrap items-center">
-            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+          <div className="flex flex-wrap items-center ">
+            <div className="relative  px-4 max-w-full flex items-center gap-2">
               <h3
                 className={
                   "font-semibold text-lg " +
@@ -71,6 +78,10 @@ export default function CardPatients({ color }) {
               >
                 Patient List
               </h3>
+              <div className="w-12 h-6 gap-2 cursor-pointer hover:text-sky-100  hover:bg-sky-600 text-sky-300 bg-sky-800 rounded-full flex justify-center items-center p-2">
+                <i class="fa fa-user-plus" aria-hidden="true" />
+                {/* <div className="text-sm capitalize">add user</div> */}
+                </div>
             </div>
             <form action={handleSearch} className="flex flex-row flex-wrap items-center lg:ml-auto mr-3">
               <div className="relative flex w-full flex-wrap items-stretch">
@@ -86,6 +97,7 @@ export default function CardPatients({ color }) {
               </div>
             </form>
           </div>
+
         </div>
 
         <div className="block w-full overflow-x-auto">

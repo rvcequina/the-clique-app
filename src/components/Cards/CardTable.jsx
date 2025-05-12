@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { addDays, format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
-
-
+import { PDFViewer } from '@react-pdf/renderer';
+import MyDocument from "@/reports/document";
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
@@ -11,7 +11,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-
+import ViewDocument from "@/views/dashboard/patient/viewDocument";
 
 const CardTable = ({
     title,
@@ -26,7 +26,7 @@ const CardTable = ({
     const [date, setDate] = useState({
 
     })
-  const [isVisible, setIsVisible] = useState(false)
+    const [isVisible, setIsVisible] = useState(false)
 
     const handleDateSearch = () => {
         const start = date.from;
@@ -37,7 +37,7 @@ const CardTable = ({
 
     const handleClick = () => {
         setIsVisible(prevState => !prevState);
-      };
+    };
 
     useEffect(() => {
         setSearchResults(data)
@@ -206,11 +206,11 @@ const CardTable = ({
                     }
                 </div>
             </div>
-            <ViewPatient showPatient={isVisible} isVisible={handleClick} >
+            <ViewDocument showDocument={isVisible} isVisible={handleClick} >
                 <PDFViewer style={{ width: '100%', height: '100%', transform: 'scale(1)' }}>
                     <MyDocument test="RYAN" />
                 </PDFViewer>
-            </ViewPatient>
+            </ViewDocument>
         </>
     );
 }
