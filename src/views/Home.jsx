@@ -1,5 +1,5 @@
 
-import asset1 from '@/assets/profile/mitch.jpg'
+import asset1 from '@/assets/profile/mitch.png'
 import asset2 from '@/assets/profile/alexa.jpg'
 import asset3 from '@/assets/profile/ara.jpg'
 import asset4 from '@/assets/profile/paul.jpg'
