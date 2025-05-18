@@ -103,9 +103,9 @@ const MyDocument = ({ data }) => {
 
   useEffect(() => {
     const getPatient = JSON.parse(localStorage.getItem('patient'));
-    console.log(getPatient)
+   
     setDetails(getPatient)
-    console.log(data)
+    
   }, [])
 
   return (

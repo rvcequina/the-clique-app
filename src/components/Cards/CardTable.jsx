@@ -34,7 +34,7 @@ const CardTable = ({
         const start = date.from;
         const end = date.to;
 
-        console.log(start, end)
+       
     }
 
     const handleClick = (idx) => {
