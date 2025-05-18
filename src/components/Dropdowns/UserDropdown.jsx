@@ -21,7 +21,7 @@ const UserDropdown = () => {
 
     useMemo(() => {
         // Component did mount logic here
-        console.log('Component mounted');
+      
         setUser(getCurrentUser())
         // Cleanup function to run when the component is destroyed
 

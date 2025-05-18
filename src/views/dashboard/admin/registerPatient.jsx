@@ -68,7 +68,7 @@ const RegisterNewPatient = () => {
         patients.push(patientDetails)
         users.push(loginDetails)
 
-        console.log(patients, users)
+        
 
         toast.success("Registered Successfully", {
             description: `Username : ${patientDetails.firstName}_${patientDetails.lastName} - Temp Password: ${formattedDate.split('-').join("")} `,

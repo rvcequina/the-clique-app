@@ -46,7 +46,7 @@ export default function CardPatients({ color }) {
     if (patientList) {
       searchInArray(patientList, '');
     }
-    console.log(patientList)
+    
   }, [patientList])
 
   const handleView = async (id) => {
