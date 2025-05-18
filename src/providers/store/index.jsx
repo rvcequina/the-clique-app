@@ -35,8 +35,6 @@ const StoreProvider = ({ children }) => {
             entry: item.createdAt
         }));
 
-        console.log(newList);
-        
 
         return newList
     }
@@ -118,7 +116,7 @@ const StoreProvider = ({ children }) => {
             isAdmitted: patientInfo.isAdmitted,
         }
 
-        
+         localStorage.setItem("patient", JSON.stringify(patientDetails))
 
         return patientDetails
     }
@@ -204,7 +202,7 @@ const StoreProvider = ({ children }) => {
 
     const userLogout = () => {
 
-        console.log('Component will unmount');
+        
         setCurrentUser()
         localStorage.removeItem("user");
 

@@ -83,7 +83,7 @@ const CardsProfile = ({ user }) => {
                     <div className="pb-15"></div>
                 </div> : ''
             }
-
+    
         </>
     )
 }

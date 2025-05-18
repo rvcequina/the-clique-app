@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const ViewDocument = ({ showDocument = false, isVisible = () => { }, children }) => {
 
   useEffect(() => {
-    console.log(showDocument, 'view')
+    
   }, [showDocument])
 
   return (

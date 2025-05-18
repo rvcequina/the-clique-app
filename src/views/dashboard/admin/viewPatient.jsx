@@ -74,7 +74,7 @@ const ViewPatient = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-2 sm:px-0">
-                      <CardTable title={'Medication History'} headers={['Id', 'Medication name', 'dosage',  'visited Date', 'Actions']} data={medications} daterange />
+                      <CardTable title={'Medication History'} headers={['Id', 'Medication name', 'dosage',  'visited Date', 'Actions']} data={medications} user={patient} daterange />
                     </CardContent>
                     <CardFooter>
                       {/* <Button>Save password</Button> */}
