@@ -40,7 +40,7 @@ const Register = () => {
             loginId: users.length + 1,
             nurseId: nurses.length + 1,
             userType: 1,
-            username: `${firstname.toLowerCase()}_${lastname.split(' ')[0].toLowerCase()}`,
+            username: `${firstname.split(' ')[0].toLowerCase()}_${lastname.toLowerCase()}`,
             password: password,
             lastLogin: `${formattedDate}`
         }
@@ -56,15 +56,15 @@ const Register = () => {
         }
         nurses.push(nurseDetails)
         users.push(loginDetails)
-                    toast.success("Please Log in", {
-                        description: `${nurseDetails.firstName} ${nurseDetails.lastName}`,
-                    })
-                toast.success("Registered Successfully", {
-                    description: `${new Date()}`,
-                })
-                
-                const url =  "/auth/login"
-                navigate(url);
+        toast.success("Please Log in", {
+            description: `${nurseDetails.firstName} ${nurseDetails.lastName}`,
+        })
+        toast.success("Registered Successfully", {
+            description: `${new Date()}`,
+        })
+
+        const url = "/auth/login"
+        navigate(url);
 
     }
 
