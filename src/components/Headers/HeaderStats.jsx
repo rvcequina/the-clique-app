@@ -46,7 +46,7 @@ const HeaderStats = () => {
     patientStats.encounter = getHistoryById(getUser.patientId).length
     patientStats.results = getHistoryById(getUser.patientId).filter(item => item.resultId != '').length
     patientStats.diagnosis = getHistoryById(getUser.patientId).filter(item => item.diagnosisId != '').length
-    patientStats.lastvisit = getHistoryById(getUser.patientId)[getHistoryById(getUser.patientId).length - 1].visitedDate
+    patientStats.lastvisit = getHistoryById(getUser.patientId)[getHistoryById(getUser.patientId).length - 1]?.visitedDate
   }
 
   return (

@@ -44,7 +44,7 @@ const RegisterNewPatient = () => {
             loginId: users.length + 1,
             patientId: patients.length + 1,
             userType: 2,
-            username: `${firstname.toLowerCase()}_${lastname.split(' ')[0].toLowerCase()}`,
+            username: `${firstname.split(' ')[0].toLowerCase()}_${lastname.toLowerCase()}`,
             password: formattedDate.split('-').join(""),
             lastLogin: ""
         }
@@ -64,7 +64,7 @@ const RegisterNewPatient = () => {
             createdAt: formattedDate,
             updatedAt: formattedDate,
         }
-
+       
         patients.push(patientDetails)
         users.push(loginDetails)
 
