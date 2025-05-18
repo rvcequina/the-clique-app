@@ -15,9 +15,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+ 
 const chartData = [
-  { browser: "x-ray", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "mri", visitors: 200, fill: "var(--color-safari)" },
+  { browser: "Laparoscopic Cholecystectomy", visitors: 275, fill: "var(--color-chrome)" },
+  { browser: "Abdominal Ultrasound", visitors: 200, fill: "var(--color-safari)" },
   { browser: "appendectomy", visitors: 187, fill: "var(--color-firefox)" },
   { browser: "minor cases", visitors: 173, fill: "var(--color-edge)" },
   { browser: "other", visitors: 90, fill: "var(--color-other)" },

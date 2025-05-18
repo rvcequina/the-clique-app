@@ -1,8 +1,8 @@
 
-import asset1 from '@/assets/img/team-1-800x800.jpg'
-import asset2 from '@/assets/img/team-2-800x800.jpg'
-import asset3 from '@/assets/img/team-3-800x800.jpg'
-import asset4 from '@/assets/img/team-4-470x470.png'
+import asset1 from '@/assets/profile/mitch.jpg'
+import asset2 from '@/assets/profile/alexa.jpg'
+import asset3 from '@/assets/profile/ara.jpg'
+import asset4 from '@/assets/profile/paul.jpg'
 import HEROBG from "@/assets/img/hero-bg.jpg";
 import missionpic from "@/assets/img/mission.jpg";
 import visionpic from "@/assets/img/vission.jpg";
@@ -10,7 +10,7 @@ import Navbar from '@/components/Navbars/Navbar';
 import Footer from '@/components/Footers/Footer';
 import Dialog from '@/components/Alerts/Dialog';
 import { useState } from 'react';
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 
 const Home = () => {
@@ -30,10 +30,10 @@ const Home = () => {
         if (target == 'message') {
             setMessage(val)
         }
-        if(fullName && email&&message){
+        if (fullName && email && message) {
             setIsDisabled(false)
         }
-        else{
+        else {
             setIsDisabled(true)
         }
 
@@ -281,51 +281,15 @@ const Home = () => {
                         </div>
                         <div className="flex flex-wrap">
                             <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                                <div className="px-6">
-                                    <img
-                                        alt="..."
-                                        src={asset1}
-                                        className="shadow-lg rounded-full mx-auto max-w-120-px"
-                                    />
+                                  <div className="px-6 flex flex-col items-center">
+                                    <Avatar className={'w-[10rem] h-[10rem] shadow-md'}>
+                                        <AvatarImage src={asset1} />
+                                        <AvatarFallback>MG</AvatarFallback>
+                                    </Avatar>
                                     <div className="pt-6 text-center">
-                                        <h5 className="text-xl font-bold">Ryan Tompson</h5>
+                                        <h5 className="text-xl font-bold">Michelle Grijaldo</h5>
                                         <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
-                                            Web Developer
-                                        </p>
-                                        <div className="mt-6">
-                                            <button
-                                                className="bg-lightBlue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                                                type="button"
-                                            >
-                                                <i className="fab fa-twitter"></i>
-                                            </button>
-                                            <button
-                                                className="bg-sky-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                                                type="button"
-                                            >
-                                                <i className="fab fa-facebook-f"></i>
-                                            </button>
-                                            <button
-                                                className="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                                                type="button"
-                                            >
-                                                <i className="fab fa-dribbble"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                                <div className="px-6">
-                                    <img
-                                        alt="..."
-                                        src={asset2}
-                                        className="shadow-lg rounded-full mx-auto max-w-120-px"
-                                    />
-                                    <div className="pt-6 text-center">
-                                        <h5 className="text-xl font-bold">Romina Hadid</h5>
-                                        <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
-                                            Marketing Specialist
+                                           Student Nurse
                                         </p>
                                         <div className="mt-6">
                                             <button
@@ -345,16 +309,15 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                                <div className="px-6">
-                                    <img
-                                        alt="..."
-                                        src={asset3}
-                                        className="shadow-lg rounded-full mx-auto max-w-120-px"
-                                    />
+                                <div className="px-6 flex flex-col items-center">
+                                    <Avatar className={'w-[10rem] h-[10rem] shadow-md'}>
+                                        <AvatarImage src={asset2} />
+                                        <AvatarFallback>AL</AvatarFallback>
+                                    </Avatar>
                                     <div className="pt-6 text-center">
-                                        <h5 className="text-xl font-bold">Alexa Smith</h5>
+                                        <h5 className="text-xl font-bold">Alexandra Labansauan</h5>
                                         <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
-                                            UI/UX Designer
+                                           Student Nurse
                                         </p>
                                         <div className="mt-6">
                                             <button
@@ -364,40 +327,27 @@ const Home = () => {
                                                 <i className="fab fa-google"></i>
                                             </button>
                                             <button
-                                                className="bg-lightBlue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                                                className="bg-sky-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
                                                 type="button"
                                             >
-                                                <i className="fab fa-twitter"></i>
-                                            </button>
-                                            <button
-                                                className="bg-blueGray-700 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                                                type="button"
-                                            >
-                                                <i className="fab fa-instagram"></i>
+                                                <i className="fab fa-facebook-f"></i>
                                             </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
-                                <div className="px-6">
-                                    <img
-                                        alt="..."
-                                        src={asset4}
-                                        className="shadow-lg rounded-full mx-auto max-w-120-px"
-                                    />
+                                 <div className="px-6 flex flex-col items-center">
+                                    <Avatar className={'w-[10rem] h-[10rem] shadow-md'}>
+                                        <AvatarImage src={asset3} />
+                                        <AvatarFallback>AR</AvatarFallback>
+                                    </Avatar>
                                     <div className="pt-6 text-center">
-                                        <h5 className="text-xl font-bold">Jenna Kardi</h5>
+                                        <h5 className="text-xl font-bold">Ara Venus Reataza</h5>
                                         <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
-                                            Founder and CEO
+                                            Student Nurse
                                         </p>
                                         <div className="mt-6">
-                                            <button
-                                                className="bg-pink-500 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
-                                                type="button"
-                                            >
-                                                <i className="fab fa-dribbble"></i>
-                                            </button>
                                             <button
                                                 className="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
                                                 type="button"
@@ -405,16 +355,38 @@ const Home = () => {
                                                 <i className="fab fa-google"></i>
                                             </button>
                                             <button
-                                                className="bg-lightBlue-400 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                                                className="bg-sky-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
                                                 type="button"
                                             >
-                                                <i className="fab fa-twitter"></i>
+                                                <i className="fab fa-facebook-f"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
+                               <div className="px-6 flex flex-col items-center">
+                                    <Avatar className={'w-[10rem] h-[10rem] shadow-md'}>
+                                        <AvatarImage src={asset4} />
+                                        <AvatarFallback>RL</AvatarFallback>
+                                    </Avatar>
+                                    <div className="pt-6 text-center">
+                                        <h5 className="text-xl font-bold">Richard Paul Librodo</h5>
+                                        <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
+                                          Student Nurse
+                                        </p>
+                                        <div className="mt-6">
+                                            <button
+                                                className="bg-red-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                                                type="button"
+                                            >
+                                                <i className="fab fa-google"></i>
                                             </button>
                                             <button
-                                                className="bg-blueGray-700 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
+                                                className="bg-sky-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
                                                 type="button"
                                             >
-                                                <i className="fab fa-instagram"></i>
+                                                <i className="fab fa-facebook-f"></i>
                                             </button>
                                         </div>
                                     </div>
