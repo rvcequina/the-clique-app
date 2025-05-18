@@ -14,6 +14,8 @@ import PatientMedications from "@/views/dashboard/patient/PatientMedications";
 import PatientResults from "@/views/dashboard/patient/patientResults";
 import DoctorsReco from "@/views/dashboard/patient/doctorsReco";
 import ViewPatient from "@/views/dashboard/admin/viewPatient";
+import ViewMedications from "./views/dashboard/admin/viewMedications";
+import RegisterNewPatient from "./views/dashboard/admin/registerPatient";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -39,6 +41,8 @@ const router = createBrowserRouter([
                             { index: true, Component: Analytics },
                             { path: "patient-list", Component: PatientList },
                             { path: "patient/:pid", Component: ViewPatient },
+                            { path: "add-patient", Component: RegisterNewPatient },
+                            { path: "medications-list", Component: ViewMedications },
                         ],
                     },
                     {

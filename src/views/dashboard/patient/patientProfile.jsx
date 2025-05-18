@@ -10,7 +10,6 @@ const PatientProfile =()=>{
   },[])
     return(
        <div className="min-h-[60vh]">
-        test
          <CardsProfile user={user}/>
        </div>
     )

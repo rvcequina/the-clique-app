@@ -1,4 +1,3 @@
-
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
@@ -76,7 +75,7 @@ const CardsProfile = ({ user }) => {
                                 </div>
                                 <div className="grid w-1/3  items-center gap-1.5">
                                     <Label htmlFor="status">Status</Label>
-                                    <Input type="text" id="status" value={user.isValidated ? 'Active' : 'Discharged'} disabled />
+                                    <Input type="text" id="status" value={user.isAdmitted ? 'Active' : 'Discharged'} disabled />
                                 </div>
                             </div>
                         </div>
@@ -84,7 +83,7 @@ const CardsProfile = ({ user }) => {
                     <div className="pb-15"></div>
                 </div> : ''
             }
-
+    
         </>
     )
 }

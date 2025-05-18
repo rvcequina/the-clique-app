@@ -17,9 +17,11 @@ const CardTable = ({
     title,
     headers = [],
     data = [],
+    user={},
     color,
     searchbar = false,
     daterange = false,
+    actions = true
 
 }) => {
     const [searchResults, setSearchResults] = useState()
@@ -27,7 +29,7 @@ const CardTable = ({
 
     })
     const [isVisible, setIsVisible] = useState(false)
-
+    const [selected, setSelected] = useState()
     const handleDateSearch = () => {
         const start = date.from;
         const end = date.to;
@@ -35,7 +37,8 @@ const CardTable = ({
         console.log(start, end)
     }
 
-    const handleClick = () => {
+    const handleClick = (idx) => {
+        setSelected(searchResults[idx])
         setIsVisible(prevState => !prevState);
     };
 
@@ -182,12 +185,16 @@ const CardTable = ({
                                                             })
 
                                                         }
-                                                        <td onClick={() => handleClick()} className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            <div className="flex gap-4 items-center cursor-pointer w-max p-2 px-4 hover:bg-white hover:text-lightBlue-600">
-                                                                <i className="fas fa-eye"></i>
-                                                                View
-                                                            </div>
-                                                        </td>
+                                                        {
+                                                            actions ?
+                                                                <td onClick={() => handleClick(idx)} className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                                    <div className="flex gap-4 items-center cursor-pointer w-max p-2 px-4 hover:bg-white hover:text-lightBlue-600">
+                                                                        <i className="fas fa-eye"></i>
+                                                                        View
+                                                                    </div>
+                                                                </td> : ''
+                                                        }
+
                                                     </tr>
                                                 )
                                             })
@@ -208,7 +215,7 @@ const CardTable = ({
             </div>
             <ViewDocument showDocument={isVisible} isVisible={handleClick} >
                 <PDFViewer style={{ width: '100%', height: '100%', transform: 'scale(1)' }}>
-                    <MyDocument test="RYAN" />
+                    <MyDocument data={selected} />
                 </PDFViewer>
             </ViewDocument>
         </>

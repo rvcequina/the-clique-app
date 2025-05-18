@@ -36,6 +36,7 @@ export default function CardPatients({ color }) {
           return prev; // No changes if the patient is already present
         });
       }
+
     });
 
 
@@ -45,6 +46,7 @@ export default function CardPatients({ color }) {
     if (patientList) {
       searchInArray(patientList, '');
     }
+    console.log(patientList)
   }, [patientList])
 
   const handleView = async (id) => {
@@ -53,7 +55,7 @@ export default function CardPatients({ color }) {
     state.results = await getPatientResultById(id)
     state.recommendations = []
 
-
+    
     navigate(`/dashboard/admin/patient/${id}`, { state: state, replace: true });
   }
 
@@ -78,10 +80,10 @@ export default function CardPatients({ color }) {
               >
                 Patient List
               </h3>
-              <div className="w-12 h-6 gap-2 cursor-pointer hover:text-sky-100  hover:bg-sky-600 text-sky-300 bg-sky-800 rounded-full flex justify-center items-center p-2">
+              <div onClick={() => navigate('/dashboard/admin/add-patient/')} className="w-12 h-6 gap-2 cursor-pointer hover:text-sky-100  hover:bg-sky-600 text-sky-300 bg-sky-800 rounded-full flex justify-center items-center p-2">
                 <i class="fa fa-user-plus" aria-hidden="true" />
                 {/* <div className="text-sm capitalize">add user</div> */}
-                </div>
+              </div>
             </div>
             <form action={handleSearch} className="flex flex-row flex-wrap items-center lg:ml-auto mr-3">
               <div className="relative flex w-full flex-wrap items-stretch">

@@ -23,6 +23,22 @@ const StoreProvider = ({ children }) => {
         return admitted.length
     }
 
+    const getMedicationById = (id = undefined) => {
+        const filteredData = id ? store.medications.filter(item => item.medicationId == id) : store.medications
+
+       
+        let newList = filteredData.map(item => ({
+            medicationId: item.medicationId,
+            name: item.name,
+            dosage: item.dosage,
+            prescribedFor: item.prescribedFor.length > 1 ? item.prescribedFor.join(", ") : item.prescribedFor[0],
+            entry: item.createdAt
+        }));
+
+
+        return newList
+    }
+
     const getCurrentUser = () => {
         const getUser = localStorage.getItem('user');
         let user = currentUser ? currentUser : JSON.parse(getUser)
@@ -77,7 +93,7 @@ const StoreProvider = ({ children }) => {
             patientId: id,
             firstName: patientInfo.firstName ? patientInfo.firstName : '',
             lastName: patientInfo.lastName ? patientInfo.lastName : '',
-            email:patientInfo.email?patientInfo.email:'',
+            email: patientInfo.email ? patientInfo.email : '',
             dob: patientInfo.dob ? patientInfo.dob : '',
             gender: patientInfo.gender ? patientInfo.gender : '',
             contactNumber: patientInfo.contactNumber ? patientInfo.contactNumber : '',
@@ -99,6 +115,8 @@ const StoreProvider = ({ children }) => {
             },
             isAdmitted: patientInfo.isAdmitted,
         }
+
+         localStorage.setItem("patient", JSON.stringify(patientDetails))
 
         return patientDetails
     }
@@ -124,14 +142,13 @@ const StoreProvider = ({ children }) => {
         patientHistory.map(data => {
 
             medications = store.medications.find(item => item.medicationId == data.medicationId)
-            if(!data.medicationId){
+            if (!data.medicationId) {
                 return
             }
             patientHistoryDetails = {
                 id: data.medicationId,
                 name: medications.name,
                 dosage: medications.dosage,
-                frequency: medications.frequency,
                 visitedDate: data.visitedDate
             }
             medicationHistory.push(patientHistoryDetails)
@@ -160,7 +177,7 @@ const StoreProvider = ({ children }) => {
         patientResults.map(data => {
 
             laboratory = store.laboratoryProcedures.find(item => item.procedureId == data.procedureId)
-            if(!data.resultId){
+            if (!data.resultId) {
                 return
             }
             patientResultDetails = {
@@ -173,19 +190,19 @@ const StoreProvider = ({ children }) => {
             laboratoryProcedures.push(patientResultDetails)
         })
         return laboratoryProcedures
-    }  
+    }
 
-    const getHistoryById = (id)=>{
-        const patientHistory =  store.patientHistory.filter(item => item.patientId == id)
+    const getHistoryById = (id) => {
+        const patientHistory = store.patientHistory.filter(item => item.patientId == id)
         return patientHistory
-         // patientStats.encounter
-    // patientStats.results
-    // patientStats.diagnosis
+        // patientStats.encounter
+        // patientStats.results
+        // patientStats.diagnosis
     }
 
     const userLogout = () => {
 
-        console.log('Component will unmount');
+        
         setCurrentUser()
         localStorage.removeItem("user");
 
@@ -208,7 +225,8 @@ const StoreProvider = ({ children }) => {
                 getPatientMedicationById,
                 getPatientResultById,
                 getHistoryById,
-                userLogout
+                userLogout,
+                getMedicationById
             }}
         >
             {children}

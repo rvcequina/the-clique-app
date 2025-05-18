@@ -172,6 +172,27 @@ const Sidebar = ({ user }) => {
                       Patient Data
                     </NavLink>
                   </li>
+                    <li className="items-center">
+                    <NavLink
+                      className={
+                        "text-xs uppercase py-3 font-bold block " +
+                        (location.pathname == "/dashboard/admin/medications-list/"
+                          ? "text-lightBlue-500 hover:text-lightBlue-600"
+                          : "text-blueGray-700 hover:text-blueGray-500")
+                      }
+                      to="admin/medications-list/"
+                    >
+                      <i
+                        className={
+                          "fas fa-tools mr-2 text-sm " +
+                          (location.pathname == "/dashboard/admin/medications-list/"
+                            ? "opacity-75"
+                            : "text-blueGray-300")
+                        }
+                      ></i>{" "}
+                      Medications List
+                    </NavLink>
+                  </li>
 
 
                 </ul>
