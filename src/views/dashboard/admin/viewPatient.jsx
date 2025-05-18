@@ -20,11 +20,11 @@ import { useLocation,useNavigate } from "react-router";
 
 import CardsProfile from "@/components/Cards/CardsProfile"
 import CardTable from "@/components/Cards/CardTable";
+import { useEffect } from "react"
 const ViewPatient = () => {
   const location = useLocation();
   const { patient, medications, results, recommendations } = location.state || {};
    const navigate = useNavigate();
-
 
   return (
     <>
@@ -74,7 +74,7 @@ const ViewPatient = () => {
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-2 sm:px-0">
-                      <CardTable title={'Medication History'} headers={['Id', 'Medication name', 'dosage', 'frequency', 'visited Date', 'Actions']} data={medications} daterange />
+                      <CardTable title={'Medication History'} headers={['Id', 'Medication name', 'dosage',  'visited Date', 'Actions']} data={medications} daterange />
                     </CardContent>
                     <CardFooter>
                       {/* <Button>Save password</Button> */}

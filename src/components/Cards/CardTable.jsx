@@ -20,6 +20,7 @@ const CardTable = ({
     color,
     searchbar = false,
     daterange = false,
+    actions = true
 
 }) => {
     const [searchResults, setSearchResults] = useState()
@@ -182,12 +183,16 @@ const CardTable = ({
                                                             })
 
                                                         }
-                                                        <td onClick={() => handleClick()} className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                                            <div className="flex gap-4 items-center cursor-pointer w-max p-2 px-4 hover:bg-white hover:text-lightBlue-600">
-                                                                <i className="fas fa-eye"></i>
-                                                                View
-                                                            </div>
-                                                        </td>
+                                                        {
+                                                            actions ?
+                                                                <td onClick={() => handleClick()} className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                                    <div className="flex gap-4 items-center cursor-pointer w-max p-2 px-4 hover:bg-white hover:text-lightBlue-600">
+                                                                        <i className="fas fa-eye"></i>
+                                                                        View
+                                                                    </div>
+                                                                </td> : ''
+                                                        }
+
                                                     </tr>
                                                 )
                                             })
